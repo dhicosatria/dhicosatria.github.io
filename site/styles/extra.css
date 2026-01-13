@@ -1,0 +1,6 @@
+/* Custom styles for Rubberdust Notes */
+
+/* Optional: tighten content width */
+.md-content {
+  max-width: 900px;
+}
