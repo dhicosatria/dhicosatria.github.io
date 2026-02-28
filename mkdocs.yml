@@ -95,8 +95,23 @@ nav:
       - Events:
           - Advent of Cyber 2025 (Cyberstudent):
               - Overview: ctf/advent-of-cyber_cyberstudent_2025/index.md
-              - Day 3 – Syndicate Infrastructure: ctf/advent-of-cyber_cyberstudent_2025/day_3_Syndicate-Infrastructure.md
-              - Day 4 – The Elf's Wager: ctf/advent-of-cyber_cyberstudent_2025/day_4_The Elf's Wager.md
+              - The Mission Begins: ctf/advent-of-cyber_cyberstudent_2025/day_1_The-Mission-Begins.md
+              - The First Strike: ctf/advent-of-cyber_cyberstudent_2025/day_2_The-First-Strike.md
+              - Syndicate Infrastructure: ctf/advent-of-cyber_cyberstudent_2025/day_3_Syndicate-Infrastructure.md
+              - The Elf's Wager: ctf/advent-of-cyber_cyberstudent_2025/day_4_The-Elf's-Wager.md
+              - Kramazon: ctf/advent-of-cyber_cyberstudent_2025/day_5_Kramazon.md
+              - KDNU-3B: ctf/advent-of-cyber_cyberstudent_2025/day_6_KDNU-3B.md
+              - Failed exfil: ctf/advent-of-cyber_cyberstudent_2025/day_7_Failed-Exfil.md
+              - Log Folly: ctf/advent-of-cyber_cyberstudent_2025/day_8_Log-Folly.md
+              - Time to Escalate: ctf/advent-of-cyber_cyberstudent_2025/day_9_Time-to-Escalate.md
+              - Jingle's Validator: ctf/advent-of-cyber_cyberstudent_2025/day_10_Jingle's-Validator.md
+              - Syndiware: ctf/advent-of-cyber_cyberstudent_2025/day_11_Syndiware.md
+              - Re-Key-Very: ctf/advent-of-cyber_cyberstudent_2025/day_12_Re-Key-very.md
+              - Holiday Routing: ctf/advent-of-cyber_cyberstudent_2025/day_13_Holiday-Routing.md
+              - Multifactorial: ctf/advent-of-cyber_cyberstudent_2025/day_14_Multifactorial.md
+              - Guide My Drone Tonight: ctf/advent-of-cyber_cyberstudent_2025/day_17_Guide-My-Drone-Tonight.md
+
+
 
       - Categories:
           - Forensics: ctf/forensics/index.md
