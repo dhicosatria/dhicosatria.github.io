@@ -1,4 +1,4 @@
-# Dhico's Portfolio & Security Notes
+# Portfolio & Security Notes
 
 Welcome to my personal knowledge base and portfolio.
 
