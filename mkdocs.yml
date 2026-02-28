@@ -1,5 +1,14 @@
 site_name: Rubberdust Notes
 site_url: https://dhicosatria.github.io/
+
+validation:
+  links:
+    absolute_links: ignore
+    unrecognized_links: ignore
+  nav:
+    omitted_files: ignore
+
+
 theme:
   name: material
   custom_dir: overrides
@@ -90,8 +99,8 @@ nav:
               - Day 4 – The Elf's Wager: ctf/advent-of-cyber_cyberstudent_2025/day_4_The Elf's Wager.md
 
       - Categories:
-          - Forensics: ctf/forensics.md
-          - Crypto: ctf/crypto.md
+          - Forensics: ctf/forensics/index.md
+
 
   - Labs Simulation:
       - Overview: labs_simulate/index.md
@@ -101,4 +110,6 @@ nav:
       - Overview: project/index.md
   - Test: test.md
   - About: about.md
+
+
 
