@@ -1,2 +1,8 @@
-<script data-goatcounter="https://dhico.goatcounter.com/count"
-        async src="//gc.zgo.at/count.js"></script>
+{% if page and page.meta.show_date %}
+  <div class="page-date">
+    <small>
+     Created: {{ page.git_creation_date_localized }}  
+     Updated: {{ page.git_revision_date_localized }}
+    </small>
+  </div>
+{% endif %}

@@ -22,7 +22,7 @@ theme:
     - navigation.path
     - navigation.sections
     - navigation.top
-    - toc.integrate
+    #- toc.integrate
     - content.code.copy
     - content.tabs.link
 
@@ -60,8 +60,6 @@ theme:
 markdown_extensions:
   #core
   - admonition
-  - toc:
-      permalink: true
   - pymdownx.superfences
   - pymdownx.highlight
   - pymdownx.details
@@ -79,9 +77,22 @@ markdown_extensions:
           class: mermaid
           format: !!python/name:pymdownx.superfences.fence_code_format
 
+  - toc:
+      permalink: true # Memunculkan ikon link di sebelah setiap heading
+      toc_depth: 3    # Mengatur TOC agar menampilkan heading hingga level 3 (###)
+
 plugins:
   - search
-
+  - blog
+  - tags
+  #- document-dates:
+  #    type: datetime
+  #    position: bottom
+  #    locale: en
+  - git-revision-date-localized:
+      enable_creation_date: true
+      type: datetime
+      fallback_to_build_date: true
 
 extra_css:
   - styles/extra.css
@@ -114,7 +125,10 @@ nav:
 
 
       - Categories:
-          - Forensics: ctf/forensics/index.md
+        - Forensics:
+          - List cases: ctf/forensics/index.md
+          - "From Fake Chrome to Shikata Shellcode: Rebuilding a Multi-Stage Infection Step by Step": ctf/forensics/shikataganai.md
+
 
 
   - Labs Simulation:

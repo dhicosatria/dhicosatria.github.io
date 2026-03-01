@@ -1,3 +1,12 @@
+---
+comments: true
+tags:
+  - Forensics
+  - Malware Analysis
+show_date: true
+---
+
+
 # From Fake Chrome to Shikata Shellcode: Rebuilding a Multi-Stage Infection Step by Step
 
 We pulled these [artifacts](https://drive.google.com/file/d/1jY9ts7WemYzjk_LdsNNAYFqbUg7P9phb/view?usp=sharing) from a fried workstation. A user downloaded something from a shady site, and shortly after, the machine started lagging and throwing weird popups.
