@@ -1,0 +1,1900 @@
+<!DOCTYPE html><html lang="en" class="no-js"><head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://dhicosatria.github.io/ctf/advent-of-cyber_cyberstudent_2025/day_14_Multifactorial/">
+      
+      
+        <link rel="prev" href="../day_13_Holiday-Routing/">
+      
+      
+        <link rel="next" href="../day_17_Guide-My-Drone-Tonight/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Multifactorial - Rubberdust Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../styles/extra.css">
+    
+      <link rel="stylesheet" href="../../../assets/document_dates/fonts/material-icons.css">
+    
+      <link rel="stylesheet" href="../../../assets/document_dates/tippy/light.css">
+    
+      <link rel="stylesheet" href="../../../assets/document_dates/tippy/material.css">
+    
+      <link rel="stylesheet" href="../../../assets/document_dates/tippy/backdrop.css">
+    
+      <link rel="stylesheet" href="../../../assets/document_dates/tippy/shift-away.css">
+    
+      <link rel="stylesheet" href="../../../assets/document_dates/tippy/scale.css">
+    
+      <link rel="stylesheet" href="../../../assets/document_dates/tippy/tippy.css">
+    
+      <link rel="stylesheet" href="../../../assets/document_dates/core/core.css">
+    
+      <link rel="stylesheet" href="../../../assets/document_dates/user.config.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  <link href="../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color); }
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color); }
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color); }
+        </style></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#day-14-multifactorial" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Rubberdust Notes" class="md-header__button md-logo" aria-label="Rubberdust Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Rubberdust Notes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Multifactorial
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo" aria-label="Switch to dark mode" type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"></path></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo" aria-label="Switch to light mode" type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"></path></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../" class="md-tabs__link">
+          
+  
+  
+  CTF
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../labs_simulate/" class="md-tabs__link">
+          
+  
+  
+  Labs Simulation
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../project/" class="md-tabs__link">
+          
+  
+  
+  Projects
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../test/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Test
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../about/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  About
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Rubberdust Notes" class="md-nav__button md-logo" aria-label="Rubberdust Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+
+    </a>
+    Rubberdust Notes
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CTF
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    CTF
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Events
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Events
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_2_1" id="__nav_2_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Advent of Cyber 2025 (Cyberstudent)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Advent of Cyber 2025 (Cyberstudent)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../day_1_The-Mission-Begins/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The Mission Begins
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../day_2_The-First-Strike/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The First Strike
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../day_3_Syndicate-Infrastructure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Syndicate Infrastructure
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../day_4_The-Elf%27s-Wager/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The Elf's Wager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../day_5_Kramazon/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kramazon
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../day_6_KDNU-3B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    KDNU-3B
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../day_7_Failed-Exfil/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Failed exfil
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../day_8_Log-Folly/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Log Folly
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../day_9_Time-to-Escalate/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Time to Escalate
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../day_10_Jingle%27s-Validator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Jingle's Validator
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../day_11_Syndiware/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Syndiware
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../day_12_Re-Key-very/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Re-Key-Very
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../day_13_Holiday-Routing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Holiday Routing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Multifactorial
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Multifactorial
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#description" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Description
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../day_17_Guide-My-Drone-Tonight/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide My Drone Tonight
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3">
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Categories
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Categories
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../forensics/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Forensics
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../../labs_simulate/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Labs Simulation
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../../project/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Projects
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../test/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Test
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../about/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#description" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Description
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation">
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Home
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../../" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    CTF
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+    
+      
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Events
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Advent of Cyber 2025 (Cyberstudent)
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="day-14-multifactorial">day 14 Multifactorial<a class="headerlink" href="#day-14-multifactorial" title="Permanent link">¶</a></h1>
+<p>category : web exploit</p>
+<h2 id="description"><strong>Description</strong><a class="headerlink" href="#description" title="Permanent link">¶</a></h2>
+<p>Modern authentication relies on more than just a password.</p>
+<p>Something you know, something you have, and something you are. Together, they're meant to provide layered security that can withstand compromise of any single factor.</p>
+<p>Santa's workshop follows this model to the letter. A password gates access, a time-based code confirms possession, and a passkey verifies identity using modern cryptography. Each step appears independent. Each check appears correct.</p>
+<p>Analyze the authentication flow end-to-end. If multifactor authentication is only as strong as its weakest link, can you find the point where identity becomes a matter of belief rather than proof?</p>
+<p><a href="https://multifactorial.csd.lol/"><strong>https://multifactorial.csd.lol/</strong></a></p>
+<hr>
+<p><em><strong>You are only allowed to test in the scope&nbsp;<code>https://multifactorial.csd.lol/*</code>.</strong>&nbsp;Blind brute-force request sending (e.g. using tools like DirBuster) can trigger Cloudflare rate limits. Do not attempt to bypass Cloudflare limits. Therefore, if you wish to brute-force, please limit your wordlists or attack scope.</em></p>
+<p>hint 1</p>
+<p>Stage 1: Look in the obfuscated JS code in the script tag. Do you notice anything among the strings? How are passwords commonly stored, and how can they be reversed?</p>
+<p>Stage 2: Again, look in the code, do you see any values in a request that can modified? Perhaps, they reveal some&nbsp;<a href="https://www.okta.com/identity-101/hmac/"><strong>useful information</strong></a>. Remember, a TOTP is usually six digits and often resets every 30 seconds (at :00 and :30 seconds).</p>
+<p>Stage 3: The&nbsp;<strong><code>userHandle</code></strong>&nbsp;field in&nbsp;<strong><code>POST /api/webauthn/auth/verify</code></strong>&nbsp;may be in your interest. Does the server&nbsp;<em>really</em>&nbsp;verify that field? Try different names for the passkeys. How does the&nbsp;<strong><code>userHandle</code></strong>&nbsp;change? If something is always the same length, what could it be? Remember, your goal is to impersonate the&nbsp;<strong><code>santa</code></strong>&nbsp;user.</p>
+<p>And for all the stages, remember that you can trivially determine what type of hash something is.</p>
+<p>hint 2</p>
+<p>Stage 1: There is a SHA-256 hash hidden in the script tag among the obfuscated code. Are you able to reverse it, perhaps by brute forcing? If you can't get it working locally, there are online tools to do this as well, like hashes.com.</p>
+<p>Stage 2:&nbsp;<strong><code>HMAC = sha256(secret_key, message)</code></strong>. The&nbsp;<strong><code>message</code></strong>&nbsp;is just the six-digit TOTP code (and there are only 999,999 possibilities of that!).</p>
+<p>Stage 3: If stage 1 has SHA-256, stage 2 has SHA-256, then stage 3 must... yep! Also have SHA-256! Also, SHA256 doesn't always output in hex. Try creating a userHandle yourself with&nbsp;<strong><code>santa</code></strong>&nbsp;instead of the passkey's name.</p>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">¶</a></h2>
+<p>This challenge simulates a modern Multi-Factor Authentication (MFA) system consisting of:</p>
+<ol>
+<li><strong>Something You Know</strong> → Password</li>
+<li><strong>Something You Have</strong> → TOTP (Time-based One-Time Password)</li>
+<li><strong>Something You Are</strong> → Passkey (WebAuthn)</li>
+</ol>
+<h1 id="stage-1-something-you-know-password">STAGE 1 Something You Know (Password)<a class="headerlink" href="#stage-1-something-you-know-password" title="Permanent link">¶</a></h1>
+<p>Login using <strong>username + password</strong></p>
+<h2 id="information-obtained">Information Obtained<a class="headerlink" href="#information-obtained" title="Permanent link">¶</a></h2>
+<p>You obtained the following credentials:</p>
+<div class="highlight"><pre><span></span><code>bf33632dd9668787878890cb4fbb54261b6b7571:northpole123
+</code></pre></div>
+<p>Meaning:</p>
+<ul>
+<li><code>bf33632dd9668787878890cb4fbb54261b6b7571</code> → <strong>hash</strong></li>
+<li><code>northpole123</code> → <strong>plaintext password</strong></li>
+</ul>
+<hr>
+<h2 id="concept-cracking-the-hash">Concept: Cracking the Hash<a class="headerlink" href="#concept-cracking-the-hash" title="Permanent link">¶</a></h2>
+<h3 id="what-is-a-hash">What is a hash?<a class="headerlink" href="#what-is-a-hash" title="Permanent link">¶</a></h3>
+<ul>
+<li>Hash = one-way function</li>
+<li>Used to store passwords securely</li>
+</ul>
+<h3 id="how-can-it-be-cracked">How can it be “cracked”?<a class="headerlink" href="#how-can-it-be-cracked" title="Permanent link">¶</a></h3>
+<p>Not reversing the hash, but:</p>
+<ul>
+<li>Trying common passwords</li>
+<li>Hashing those passwords</li>
+<li>Compare with the target hash</li>
+</ul>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><code>hash("northpole123") == bf33632dd9668787878890cb4fbb54261b6b7571
+</code></pre></div>
+<p>Valid password found.</p>
+<p>Login successful → redirected to <strong>Stage 2 (TOTP)</strong></p>
+<h1 id="stage-2-something-you-have-totp">STAGE 2 Something You Have (TOTP)<a class="headerlink" href="#stage-2-something-you-have-totp" title="Permanent link">¶</a></h1>
+<h3 id="purpose">Purpose<a class="headerlink" href="#purpose" title="Permanent link">¶</a></h3>
+<p>Bypass <strong>TOTP</strong> verification without knowing the secret key.</p>
+<hr>
+<h2 id="initial-observations">Initial Observations<a class="headerlink" href="#initial-observations" title="Permanent link">¶</a></h2>
+<p>Request to TOTP verification endpoint:</p>
+<div class="highlight"><pre><span></span><code>POST<span class="w"> </span>/api/something-you-have-verify?debug<span class="o">=</span><span class="m">1</span>
+</code></pre></div>
+<p>Server response:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="nt">"error"</span><span class="p">:</span><span class="s2">"Invalid TOTP code."</span><span class="p">,</span>
+<span class="nt">"hmac"</span><span class="p">:</span><span class="s2">"20415574891d2dd8d79b5be5b2ad93b656bc38cd8a0c9ac71fc3cd1afcbf88cb"</span><span class="p">,</span>
+<span class="nt">"serverTime"</span><span class="p">:</span><span class="mi">1766093085</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><strong>Sensitive information leaked</strong>:</p>
+<ul>
+<li><code>serverTime</code></li>
+<li><code>hmac</code></li>
+</ul>
+<hr>
+<h2 id="vulnerability-analysis">Vulnerability Analysis<a class="headerlink" href="#vulnerability-analysis" title="Permanent link">¶</a></h2>
+<h3 id="how-totp-works-normally">How TOTP works (normally)<a class="headerlink" href="#how-totp-works-normally" title="Permanent link">¶</a></h3>
+<ol>
+<li>Server and client share a <strong>secret</strong></li>
+<li>TOTP is calculated from:</li>
+</ol>
+<div class="highlight"><pre><span></span><code>TOTP=Truncate(HMAC(secret,floor(time/30)))
+</code></pre></div>
+<h3 id="design-error">Design Error<a class="headerlink" href="#design-error" title="Permanent link">¶</a></h3>
+<ul>
+<li>Server:</li>
+<li>Leaks <code>serverTime</code></li>
+<li>Leaks <code>HMAC</code> output</li>
+<li>Secret is never effectively kept secret</li>
+</ul>
+<hr>
+<h2 id="exploitation">Exploitation<a class="headerlink" href="#exploitation" title="Permanent link">¶</a></h2>
+<ol>
+<li>Use <code>serverTime</code> as the reference time</li>
+<li>Reconstruct the HMAC-SHA256 algorithm</li>
+<li>Brute-force the TOTP space (6 digits)</li>
+<li>Search for code that produces the same HMAC</li>
+</ol>
+<p>Automatic script generates:</p>
+<div class="highlight"><pre><span></span><code>[+] code: 322576
+</code></pre></div>
+<hr>
+<h2 id="result">Result<a class="headerlink" href="#result" title="Permanent link">¶</a></h2>
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="nt">"success"</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span><span class="nt">"message"</span><span class="p">:</span><span class="s2">"TOTP correct. Proceed to passkey stage."</span><span class="p">}</span>
+</code></pre></div>
+<p>Stage 2 successfully passed <strong>without knowing the TOTP secret</strong>.</p>
+<hr>
+<h1 id="stage-3-something-you-are-passkey-webauthn">STAGE 3 Something You Are (Passkey / WebAuthn)<a class="headerlink" href="#stage-3-something-you-are-passkey-webauthn" title="Permanent link">¶</a></h1>
+<h3 id="objective">Objective<a class="headerlink" href="#objective" title="Permanent link">¶</a></h3>
+<p>Log in as <strong>Santa (admin)</strong> without having a Santa passkey.</p>
+<hr>
+<h2 id="step-1-passkey-registration-regular-user">Step 1: Passkey Registration (Regular User)<a class="headerlink" href="#step-1-passkey-registration-regular-user" title="Permanent link">¶</a></h2>
+<h3 id="action">Action<a class="headerlink" href="#action" title="Permanent link">¶</a></h3>
+<ul>
+<li>Access:</li>
+</ul>
+<div class="highlight"><pre><span></span><code>/register-passkey
+</code></pre></div>
+<ul>
+<li>Registering a passkey as a regular user</li>
+</ul>
+<h3 id="server-output">Server Output:<a class="headerlink" href="#server-output" title="Permanent link">¶</a></h3>
+<div class="highlight"><pre><span></span><code>Credential ID: g2btPG_mj4erObRxqJ3iOQ
+Internal ID (userHandle): n4bQgYhMfWWaL-qgxVrQFQ
+</code></pre></div>
+<hr>
+<h2 id="technical-explanation">Technical Explanation<a class="headerlink" href="#technical-explanation" title="Permanent link">¶</a></h2>
+<ul>
+<li><strong>Credential ID</strong> → Public key ID</li>
+<li><strong>userHandle</strong> → Internal user ID (unsigned)</li>
+<li>Passkey:</li>
+<li>Private key stored in the OS</li>
+<li>Server only stores public key + metadata</li>
+</ul>
+<hr>
+<h2 id="client-storage">Client Storage<a class="headerlink" href="#client-storage" title="Permanent link">¶</a></h2>
+<p>The frontend stores this data in <code>localStorage</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="nx">localStorage</span><span class="p">.</span><span class="nx">setItem</span><span class="p">(</span><span class="s2">"np_userHandle"</span><span class="p">,</span><span class="w"> </span><span class="nx">userHandle</span><span class="p">);</span>
+<span class="nx">localStorage</span><span class="p">.</span><span class="nx">setItem</span><span class="p">(</span><span class="s2">"np_credId"</span><span class="p">,</span><span class="w"> </span><span class="nx">credId</span><span class="p">);</span>
+</code></pre></div>
+<hr>
+<h2 id="step-2-manipulating-localstorage">Step 2: Manipulating localStorage<a class="headerlink" href="#step-2-manipulating-localstorage" title="Permanent link">¶</a></h2>
+<p>Because <code>localStorage</code> is <strong>completely client-controlled</strong>, an attacker can change its identity:</p>
+<div class="highlight"><pre><span></span><code><span class="nx">localStorage</span><span class="p">.</span><span class="nx">setItem</span><span class="p">(</span><span class="s2">"np_userHandle"</span><span class="p">,</span><span class="s2">"ttyQg9o3L-0hGazhGum6hw"</span><span class="p">);</span>
+<span class="nx">localStorage</span><span class="p">.</span><span class="nx">setItem</span><span class="p">(</span><span class="s2">"np_name"</span><span class="p">,</span><span class="s2">"santa"</span><span class="p">);</span>
+</code></pre></div>
+<p><code>ttyQg9o3L-0hGazhGum6hw</code> is <strong>Santa's userHandle</strong>.</p>
+<hr>
+<h2 id="step-3-login-passkey">Step 3 Login Passkey<a class="headerlink" href="#step-3-login-passkey" title="Permanent link">¶</a></h2>
+<h3 id="action_1">Action<a class="headerlink" href="#action_1" title="Permanent link">¶</a></h3>
+<ul>
+<li>Click <strong>Use Passkey</strong></li>
+<li>Browser:</li>
+<li>Sign the challenge with <strong>a regular user's private key</strong></li>
+<li>Send the payload:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="nt">"id"</span><span class="p">:</span><span class="s2">"g2btPG_mj4erObRxqJ3iOQ"</span><span class="p">,</span>
+<span class="nt">"userHandle"</span><span class="p">:</span><span class="s2">"ttyQg9o3L-0hGazhGum6hw"</span><span class="p">,</span>
+<span class="nt">"signature"</span><span class="p">:</span><span class="s2">"VALID_SIGNATURE"</span>
+<span class="p">}</span>
+</code></pre></div>
+<hr>
+<h2 id="major-vulnerabilities">Major Vulnerabilities<a class="headerlink" href="#major-vulnerabilities" title="Permanent link">¶</a></h2>
+<h3 id="server-fatal-error">Server fatal error:<a class="headerlink" href="#server-fatal-error" title="Permanent link">¶</a></h3>
+<ul>
+<li>*Server trusts client's <code>userHandle</code></li>
+</ul>
+<p>Server only checks:</p>
+<ul>
+<li>Signature is valid → ✔</li>
+<li>UserHandle exists → ✔</li>
+</ul>
+<p>Not checked:</p>
+<ul>
+<li>Does this credential <strong>belong to this user</strong></li>
+<li>Does the userHandle match Public Key</li>
+</ul>
+<h2 id="impact">Impact<a class="headerlink" href="#impact" title="Permanent link">¶</a></h2>
+<p>Attacker:</p>
+<ul>
+<li>Using their own passkey</li>
+<li>Claiming another user's identity</li>
+<li>Server accepting the claim</li>
+</ul>
+<h2 id="login-results">Login Results<a class="headerlink" href="#login-results" title="Permanent link">¶</a></h2>
+<div class="highlight"><pre><span></span><code>Logged in as santa.
+Try /admin
+</code></pre></div>
+<h2 id="flag">Flag<a class="headerlink" href="#flag" title="Permanent link">¶</a></h2>
+<p>Accessing <code>/admin</code>:</p>
+<div class="highlight"><pre><span></span><code>csd{1_L34rn3D_7h15_Fr0m_70m_5C077_84CK_1n_2020}
+</code></pre></div>
+<hr>
+<h1 id="root-cause-analysis">Root Cause Analysis<a class="headerlink" href="#root-cause-analysis" title="Permanent link">¶</a></h1>
+<table>
+<thead>
+<tr>
+<th>Stage</th>
+<th>Vulnerability</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TOTP</td>
+<td>Information leakage (serverTime + HMAC)</td>
+</tr>
+<tr>
+<td>WebAuthn</td>
+<td>Trusting client-supplied identity</td>
+</tr>
+<tr>
+<td>MFA</td>
+<td>Strong factor, weak implementation</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h1 id="mitigation">Mitigation<a class="headerlink" href="#mitigation" title="Permanent link">¶</a></h1>
+<h3 id="totp">TOTP<a class="headerlink" href="#totp" title="Permanent link">¶</a></h3>
+<ul>
+<li>Don't leak HMAC / server time</li>
+<li>Use constant-time comparison</li>
+</ul>
+<h3 id="webauthn">WebAuthn<a class="headerlink" href="#webauthn" title="Permanent link">¶</a></h3>
+<ul>
+<li><strong>Ignore userHandle from client</strong></li>
+<li>Determine user based on credential ID</li>
+<li>Validate relationships:credential → user</li>
+</ul>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../media/bb295bb7-6ae1-4f99-8f71-7ce358a88fb6.png" data-desc-position="bottom"><img alt="Screenshot_2025-12-18_15_46_26.png" src="../media/bb295bb7-6ae1-4f99-8f71-7ce358a88fb6.png"></a></p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../media/abb16c69-09b3-4391-83e1-db7b75b264dc.png" data-desc-position="bottom"><img alt="Screenshot_2025-12-18_15_43_42.png" src="../media/abb16c69-09b3-4391-83e1-db7b75b264dc.png"></a></p>
+<p>northpole123</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../media/2a786462-49be-4925-b1d0-ae6616136df3.png" data-desc-position="bottom"><img alt="Screenshot_2025-12-18_16_38_22.png" src="../media/2a786462-49be-4925-b1d0-ae6616136df3.png"></a></p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../media/b778111e-8668-46d3-ae12-550d2fd829a8.png" data-desc-position="bottom"><img alt="Screenshot_2025-12-18_16_49_00.png" src="../media/b778111e-8668-46d3-ae12-550d2fd829a8.png"></a></p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../media/54cf6755-b5b6-4411-b0a0-53d1184e715f.png" data-desc-position="bottom"><img alt="Screenshot_2025-12-18_16_49_42.png" src="../media/54cf6755-b5b6-4411-b0a0-53d1184e715f.png"></a></p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../media/e12cb579-592b-4bf3-a371-d1c97c6dcba3.png" data-desc-position="bottom"><img alt="Screenshot_2025-12-18_16_51_39.png" src="../media/e12cb579-592b-4bf3-a371-d1c97c6dcba3.png"></a></p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../media/df4f7629-1e18-4d52-90ff-4f1fbd9ba5a2.png" data-desc-position="bottom"><img alt="Screenshot_2025-12-18_16_54_40.png" src="../media/df4f7629-1e18-4d52-90ff-4f1fbd9ba5a2.png"></a></p>
+<div class="document-dates-plugin-wrapper document-dates-bottom"><div class="document-dates-plugin" locale="en"><div class="dd-left"><span class="dd-item" data-tippy-content data-tippy-raw="2026-02-28"><span class="material-icons" data-icon="doc_created"></span><time datetime="2026-02-28T20:23:36-05:00">2026-02-28 20:23:36</time></span><span class="dd-item" data-tippy-content data-tippy-raw="2026-03-01"><span class="material-icons" data-icon="doc_updated"></span><time datetime="2026-03-01T01:23:36+00:00">2026-03-01 01:23:36</time></span></div><div class="dd-right"><span class="material-icons" data-icon="doc_author"></span><div class="author-group"><div class="avatar-wrapper" data-name="dhicosatria" data-tippy-content data-tippy-raw="&lt;a href=&quot;mailto:dhicosatria77@gmail.com&quot;&gt;dhicosatria&lt;/a&gt;"><span class="avatar-text"></span><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="" data-desc-position="bottom"><img class="avatar" data-src="" data-email="dhicosatria77@gmail.com"></a></div></div></div></div></div>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"></path></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.prune", "navigation.path", "navigation.sections", "navigation.top", "content.code.copy", "content.tabs.link", "content.action.edit", "content.action.view", "content.action.revision", "search.suggest", "search.highlight", "content.code.copy", "content.tabs.link", "content.tooltips"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../../assets/document_dates/tippy/popper.min.js"></script>
+      
+        <script src="../../../assets/document_dates/tippy/tippy.umd.min.js"></script>
+      
+        <script src="../../../assets/document_dates/core/md5.min.js"></script>
+      
+        <script src="../../../assets/document_dates/core/default.config.js"></script>
+      
+        <script src="../../../assets/document_dates/user.config.js"></script>
+      
+        <script src="../../../assets/document_dates/core/utils.js"></script>
+      
+        <script src="../../../assets/document_dates/core/core.js"></script>
+      
+    
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></body></html>

