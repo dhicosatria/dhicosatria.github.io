@@ -25,7 +25,9 @@ theme:
     #- toc.integrate
     - content.code.copy
     - content.tabs.link
-
+    - content.action.edit
+    - content.action.view
+    - content.action.revision
     # Search
     - search.suggest
     - search.highlight
@@ -85,14 +87,15 @@ plugins:
   - search
   - blog
   - tags
-  #- document-dates:
-  #    type: datetime
-  #    position: bottom
-  #    locale: en
-  - git-revision-date-localized:
-      enable_creation_date: true
+  - glightbox
+  - document-dates:
       type: datetime
-      fallback_to_build_date: true
+      position: bottom
+      locale: en
+  # git-revision-date-localized
+  #    enable_creation_date: true
+  #    type: datetime
+  #    fallback_to_build_date: true
 
 extra_css:
   - styles/extra.css
