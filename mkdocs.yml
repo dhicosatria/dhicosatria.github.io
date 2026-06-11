@@ -1,9 +1,5 @@
 site_name: Rubberdust Notes
-<<<<<<< HEAD
 site_url: https://dhicosatria.github.io/docs/
-=======
-site_url: https://dhicosatria.github.io/
->>>>>>> 70e1268d81c5b0495b69756639256c802103b2e9
 
 validation:
   links:
