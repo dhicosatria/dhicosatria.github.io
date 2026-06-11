@@ -1,0 +1,59 @@
+name: Deploy Bio Link and Docs to GitHub Pages
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout docs repository
+        uses: actions/checkout@v4
+
+      - name: Checkout bio link
+        uses: actions/checkout@v4
+        with:
+          repository: dhicosatria/bio-link
+          path: _bio-link
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Build combined site
+        run: |
+          mkdir -p public/docs
+          rsync -a --exclude=".git" --exclude=".github" _bio-link/ public/
+          mkdocs build --site-dir public/docs
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: public
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

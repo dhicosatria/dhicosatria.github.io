@@ -1,0 +1,35 @@
+/* Custom styles for Rubberdust Notes */
+
+/* Keep your content width */
+.md-content {
+  max-width: 900px;
+}
+
+/* Match the giscus.app homepage layout: 
+  Constrain the width to a readable size and center it 
+*/
+#__comments, 
+.giscus {
+  max-width: 768px; /* This is the width giscus.app uses */
+  margin-left: auto; /* Pushes from the left to center */
+  margin-right: auto; /* Pushes from the right to center */
+  width: 100%; /* Ensures it shrinks nicely on mobile phones */
+}
+
+/* Add the subtle divider specifically to the heading */
+#__comments {
+  margin-top: 0rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--md-default-fg-color--10);
+}
+
+/* Give the iframe container proper spacing */
+.giscus {
+  margin-top: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.giscus-frame {
+  width: 100%;
+  transition: all 0.25s ease;
+}
