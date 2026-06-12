@@ -1,3 +1,12 @@
+---
+description: A hands-on Advent of Cyber 2025 challenge write-up.
+category: CTF
+tags:
+  - CTF
+  - Advent of Cyber
+comments: true
+---
+
 # day 9 Time to Escalate
 
 category : Miscellaneous

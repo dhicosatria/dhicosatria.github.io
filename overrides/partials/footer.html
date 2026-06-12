@@ -1,53 +1,24 @@
 {% if page and page.meta.comments %}
-  <h2 id="__comments">{{ lang.t("meta.comments") }}</h2>
-  <script src="https://giscus.app/client.js"
-          data-repo="dhicosatria/dhicosatria.github.io"
-          data-repo-id="R_kgDOQykWGw"
-          data-category="General"
-          data-category-id="DIC_kwDOQykWG84C3beV"
-          data-mapping="pathname"
-          data-strict="0"
-          data-reactions-enabled="1"
-          data-emit-metadata="0"
-          data-input-position="bottom"
-          data-theme="preferred_color_scheme"
-          data-lang="en"
-          crossorigin="anonymous"
-          async>
-  </script>
-  <!-- Synchronize Giscus theme with palette -->
+  <h2 id="__comments">Discussion</h2>
+  <script src="https://giscus.app/client.js" data-repo="dhicosatria/dhicosatria.github.io" data-repo-id="R_kgDOQykWGw" data-category="General" data-category-id="DIC_kwDOQykWG84C3beV" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom" data-theme="preferred_color_scheme" data-lang="en" crossorigin="anonymous" async></script>
   <script>
-    var giscus = document.querySelector("script[src*=giscus]")
-
-    // Set palette on initial load
-    var palette = __md_get("__palette")
-    if (palette && typeof palette.color === "object") {
-      var theme = palette.color.scheme === "slate"
-        ? "transparent_dark"
-        : "light"
-
-      // Instruct Giscus to set theme
-      giscus.setAttribute("data-theme", theme) 
-    }
-
-    // Register event handlers after documented loaded
-    document.addEventListener("DOMContentLoaded", function() {
-      var ref = document.querySelector("[data-md-component=palette]")
-      ref.addEventListener("change", function() {
-        var palette = __md_get("__palette")
-        if (palette && typeof palette.color === "object") {
-          var theme = palette.color.scheme === "slate"
-            ? "transparent_dark"
-            : "light"
-
-          // Instruct Giscus to change theme
-          var frame = document.querySelector(".giscus-frame")
-          frame.contentWindow.postMessage(
-            { giscus: { setConfig: { theme } } },
-            "https://giscus.app"
-          )
-        }
-      })
-    })
+    document.addEventListener("DOMContentLoaded", function () {
+      var script = document.querySelector("script[src*=giscus]"); var palette = __md_get("__palette");
+      if (script && palette && typeof palette.color === "object") script.setAttribute("data-theme", palette.color.scheme === "slate" ? "transparent_dark" : "light");
+      var toggle = document.querySelector("[data-md-component=palette]");
+      if (toggle) toggle.addEventListener("change", function () { var frame = document.querySelector(".giscus-frame"); var current = __md_get("__palette"); if (frame && current && typeof current.color === "object") frame.contentWindow.postMessage({ giscus: { setConfig: { theme: current.color.scheme === "slate" ? "transparent_dark" : "light" } } }, "https://giscus.app"); });
+    });
   </script>
 {% endif %}
+<footer class="md-footer">
+  {% if "navigation.footer" in features %}
+    {% if page.previous_page or page.next_page %}
+      {% if page.meta and page.meta.hide %}{% set hidden = "hidden" if "footer" in page.meta.hide %}{% endif %}
+      <nav class="md-footer__inner md-grid" aria-label="{{ lang.t('footer') }}" {{ hidden }}>
+        {% if page.previous_page %}{% set direction = lang.t("footer.previous") %}<a href="{{ page.previous_page.url | url }}" class="md-footer__link md-footer__link--prev" aria-label="{{ direction }}: {{ page.previous_page.title | e }}"><div class="md-footer__button md-icon">{% set icon = config.theme.icon.previous or "material/arrow-left" %}{% include ".icons/" ~ icon ~ ".svg" %}</div><div class="md-footer__title"><span class="md-footer__direction">{{ direction }}</span><div class="md-ellipsis">{{ page.previous_page.title }}</div></div></a>{% endif %}
+        {% if page.next_page %}{% set direction = lang.t("footer.next") %}<a href="{{ page.next_page.url | url }}" class="md-footer__link md-footer__link--next" aria-label="{{ direction }}: {{ page.next_page.title | e }}"><div class="md-footer__title"><span class="md-footer__direction">{{ direction }}</span><div class="md-ellipsis">{{ page.next_page.title }}</div></div><div class="md-footer__button md-icon">{% set icon = config.theme.icon.next or "material/arrow-right" %}{% include ".icons/" ~ icon ~ ".svg" %}</div></a>{% endif %}
+      </nav>
+    {% endif %}
+  {% endif %}
+  <div class="md-footer-meta md-typeset"><div class="md-footer-meta__inner md-grid">{% include "partials/copyright.html" %}{% if config.extra.social %}{% include "partials/social.html" %}{% endif %}</div></div>
+</footer>

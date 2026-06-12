@@ -1,3 +1,13 @@
+---
+description: A reproducible lab demonstrating how LFI can trigger outbound SMB authentication and expose NTLMv2 challenge responses.
+category: Security Lab
+tags:
+  - Security Lab
+  - Web Security
+  - NTLM
+comments: true
+---
+
 # Automated LFI to NTLMv2 Lab
 
 ## Overview

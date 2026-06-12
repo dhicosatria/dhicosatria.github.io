@@ -1,41 +1,22 @@
-# Portfolio & Security Notes
-
-Welcome to my personal knowledge base and portfolio.
-
-This site contains my hands-on writeups, technical notes, and experiments
-in cybersecurity, infrastructure, and systems engineering.
-
+---
+title: Home
+description: Hands-on cybersecurity writeups, labs, projects, and systems engineering notes.
+hide: [toc]
 ---
 
-## 📂 What You'll Find Here
+<section class="hero">
+  <p class="eyebrow">CYBERSECURITY · SYSTEMS · LEARNING IN PUBLIC</p>
+  <h1>Investigate deeply.<br>Document clearly.</h1>
+  <p class="hero-copy">Rubberdust is my technical knowledge base and portfolio, covering security research, hands-on labs, writeups, and systems engineering.</p>
+  <div class="hero-actions"><a class="md-button" href="about/">About me</a></div>
+</section>
 
-- 🏴‍☠️ **CTF Writeups**  
-  Detailed writeups covering forensics, cryptography, reverse engineering, and web challenges.
+## Featured work
 
-- 🧪 **Lab & Architecture Simulations**  
-  Notes and experiments related to system behavior, infrastructure design, and security tooling.
-
-- ☁️ **Infrastructure & Systems Notes**  
-  Linux internals, networking concepts, containers, Kubernetes, and deployment workflows.
-
-- 🔐 **Security Engineering & Detection**  
-  Configuration notes, log analysis, and observations relevant to defensive security and threat detection.
-
----
-<!-- ## Commands
-
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs -h` - Print help message and exit.
-
-## Project layout
-
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files. -->
-
-
-
-
+<div class="feature-grid">
+  <a class="feature-item" href="project/"><span>01 · PROJECT</span><strong>Projects</strong><p>Security tooling and infrastructure builds, documented from design to lessons learned.</p></a>
+  <a class="feature-item" href="labs_simulate/"><span>02 · SECURITY LAB</span><strong>Security Lab</strong><p>Reproducible environments for understanding attacks and defenses.</p></a>
+  <a class="feature-item" href="ctf/"><span>03 · CTF SERIES</span><strong>Writeups</strong><p>Challenge solutions organized by events, platforms, and categories.</p></a>
+  <a class="feature-item feature-wide" href="notes/"><span>04 · NOTES</span><strong>Notes</strong><p>Practical references across systems, cloud, software delivery, architecture, data, and security engineering.</p></a>
+  <a class="feature-item" href="blog/"><span>05 · BLOG</span><strong>Blog</strong><p>Longer-form technical articles, observations, and reflections.</p></a>
+</div>

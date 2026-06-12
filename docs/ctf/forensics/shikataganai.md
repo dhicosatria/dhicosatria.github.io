@@ -1,5 +1,7 @@
 ---
 comments: true
+description: A forensic reconstruction of a multi-stage malware infection, persistence, payload, and indicators.
+category: Digital Forensics
 tags:
   - Forensics
   - Malware Analysis

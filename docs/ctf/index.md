@@ -1,17 +1,34 @@
-# CTF Writeups
-
-This section contains a collection of Capture The Flag (CTF) writeups that I have documented.  
-Each writeup focuses on **analysis, tools used, step-by-step solving process, and lessons learned**.
-
-The goal of this documentation is not only to present the final result, but also to explain the reasoning and methodology behind each solution.
-
 ---
+title: Writeups
+description: Security challenge writeups organized by event, platform, and category.
+hide: [toc]
+---
+# Writeups
 
-## Available CTFs
-
-- [Advent of Cyber 2025 – CyberStudent](advent-of-cyber_cyberstudent_2025/index.md)
-
-
-
-
-
+<div class="index-columns">
+<section>
+<h2>Event series</h2>
+<ul>
+<li><a href="advent-of-cyber_cyberstudent_2025/">Advent of Cyber 2025</a></li>
+</ul>
+</section>
+<section>
+<h2>Platforms</h2>
+<ul>
+<li>CyberStudent
+  <ul><li><a href="advent-of-cyber_cyberstudent_2025/">Advent of Cyber 2025</a></li></ul>
+</li>
+</ul>
+</section>
+<section>
+<h2>Categories</h2>
+<ul>
+<li><a href="forensics/">Digital Forensics</a></li>
+<li>Cryptography</li>
+<li>Reverse Engineering</li>
+<li>Web Exploitation</li>
+<li>Binary Exploitation</li>
+<li>Networking &amp; Miscellaneous</li>
+</ul>
+</section>
+</div>

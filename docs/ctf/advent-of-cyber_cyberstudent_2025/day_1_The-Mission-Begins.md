@@ -1,3 +1,12 @@
+---
+description: A hands-on Advent of Cyber 2025 challenge write-up.
+category: CTF
+tags:
+  - CTF
+  - Advent of Cyber
+comments: true
+---
+
 # day 1 The Mission Begins
 
 category : cryptography
@@ -21,4 +30,5 @@ Submit your answer as: **`csd{username_password}`**
 
 ![image.png](media/day1.png)
 
-csd{W3lc0m3_8aCK_70_adv3N7_2025}
+??? success "Reveal the flag"
+    `csd{W3lc0m3_8aCK_70_adv3N7_2025}`

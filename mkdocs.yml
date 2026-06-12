@@ -1,44 +1,32 @@
-site_name: Rubberdust Notes
+site_name: Rubberdust
+site_description: Hands-on cybersecurity write-ups, labs, projects, and systems engineering notes.
+site_author: Dhico Satria
 site_url: https://dhicosatria.github.io/docs/
-
+copyright: Copyright &copy; 2026 Dhico Satria
 validation:
   links:
     absolute_links: ignore
-    unrecognized_links: ignore
+    unrecognized_links: warn
   nav:
-    omitted_files: ignore
-
-
+    omitted_files: warn
 theme:
   name: material
   custom_dir: overrides
-
   language: en
-
+  logo: assets/logo.svg
   features:
-    # Navigation
     - navigation.tabs
-    - navigation.prune
+    - navigation.indexes
     - navigation.path
-    - navigation.sections
     - navigation.top
-    #- toc.integrate
-    - content.code.copy
-    - content.tabs.link
-    - content.action.edit
-    - content.action.view
-    - content.action.revision
-    # Search
-    - search.suggest
-    - search.highlight
-
-    # Content
+    - navigation.footer
     - content.code.copy
     - content.tabs.link
     - content.tooltips
-
+    - search.suggest
+    - search.highlight
+    - search.share
   palette:
-    # Auto dark/light
     - media: "(prefers-color-scheme: light)"
       scheme: default
       primary: indigo
@@ -46,7 +34,6 @@ theme:
       toggle:
         icon: material/weather-night
         name: Switch to dark mode
-
     - media: "(prefers-color-scheme: dark)"
       scheme: slate
       primary: indigo
@@ -54,35 +41,29 @@ theme:
       toggle:
         icon: material/weather-sunny
         name: Switch to light mode
-
   font:
     text: Roboto
     code: Roboto Mono
-
 markdown_extensions:
-  #core
+  - abbr
   - admonition
-  - pymdownx.superfences
-  - pymdownx.highlight
+  - attr_list
+  - md_in_html
   - pymdownx.details
+  - pymdownx.highlight:
+      anchor_linenums: true
   - pymdownx.inlinehilite
   - pymdownx.snippets
-
-  # Tabs
   - pymdownx.tabbed:
       alternate_style: true
-
-  # Mermaid diagrams
   - pymdownx.superfences:
       custom_fences:
         - name: mermaid
           class: mermaid
           format: !!python/name:pymdownx.superfences.fence_code_format
-
   - toc:
-      permalink: true # Memunculkan ikon link di sebelah setiap heading
-      toc_depth: 3    # Mengatur TOC agar menampilkan heading hingga level 3 (###)
-
+      permalink: true
+      toc_depth: 3
 plugins:
   - search
   - blog
@@ -92,22 +73,21 @@ plugins:
       type: datetime
       position: bottom
       locale: en
-  # git-revision-date-localized
-  #    enable_creation_date: true
-  #    type: datetime
-  #    fallback_to_build_date: true
-
+extra:
+  analytics:
+    provider: null
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/dhicosatria
+      name: Dhico Satria on GitHub
 extra_css:
   - styles/extra.css
-
-
 nav:
   - Home: index.md
-  - CTF:
+  - Writeups:
       - Overview: ctf/index.md
-
-      - Events:
-          - Advent of Cyber 2025 (Cyberstudent):
+      - Event Series:
+          - Advent of Cyber 2025:
               - Overview: ctf/advent-of-cyber_cyberstudent_2025/index.md
               - The Mission Begins: ctf/advent-of-cyber_cyberstudent_2025/day_1_The-Mission-Begins.md
               - The First Strike: ctf/advent-of-cyber_cyberstudent_2025/day_2_The-First-Strike.md
@@ -115,7 +95,7 @@ nav:
               - The Elf's Wager: ctf/advent-of-cyber_cyberstudent_2025/day_4_The-Elf's-Wager.md
               - Kramazon: ctf/advent-of-cyber_cyberstudent_2025/day_5_Kramazon.md
               - KDNU-3B: ctf/advent-of-cyber_cyberstudent_2025/day_6_KDNU-3B.md
-              - Failed exfil: ctf/advent-of-cyber_cyberstudent_2025/day_7_Failed-Exfil.md
+              - Failed Exfil: ctf/advent-of-cyber_cyberstudent_2025/day_7_Failed-Exfil.md
               - Log Folly: ctf/advent-of-cyber_cyberstudent_2025/day_8_Log-Folly.md
               - Time to Escalate: ctf/advent-of-cyber_cyberstudent_2025/day_9_Time-to-Escalate.md
               - Jingle's Validator: ctf/advent-of-cyber_cyberstudent_2025/day_10_Jingle's-Validator.md
@@ -124,24 +104,14 @@ nav:
               - Holiday Routing: ctf/advent-of-cyber_cyberstudent_2025/day_13_Holiday-Routing.md
               - Multifactorial: ctf/advent-of-cyber_cyberstudent_2025/day_14_Multifactorial.md
               - Guide My Drone Tonight: ctf/advent-of-cyber_cyberstudent_2025/day_17_Guide-My-Drone-Tonight.md
-
-
-
-      - Categories:
-        - Forensics:
-          - List cases: ctf/forensics/index.md
-          - "From Fake Chrome to Shikata Shellcode: Rebuilding a Multi-Stage Infection Step by Step": ctf/forensics/shikataganai.md
-
-
-
-  - Labs Simulation:
+      - Forensics:
+          - Overview: ctf/forensics/index.md
+          - From Fake Chrome to Shikata Shellcode: ctf/forensics/shikataganai.md
+  - Labs:
       - Overview: labs_simulate/index.md
       - Automated LFI to NTLMv2 Lab: labs_simulate/automated-lfi-to-ntlmv2-lab.md
-
-  - Projects:
-      - Overview: project/index.md
-  - Test: test.md
+  - Projects: project/index.md
+  - Notes: notes/index.md
+  - Blog: blog/index.md
+  - Tags: tags.md
   - About: about.md
-
-
-

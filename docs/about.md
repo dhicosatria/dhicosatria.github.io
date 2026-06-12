@@ -1,23 +1,29 @@
-### Cybersecurity • CTF Writeups • Infrastructure & Systems
-
-I am an student also engineer with a strong interest in cybersecurity, cloud, system, especially **CTF challenges, digital forensics, system architecture, and system-level analysis**.
-
-This site serves as my personal **knowledge base and portfolio**, where I document what I **learn, build, analyze, and break** through hands-on technical exploration.
-
+---
+title: About
+description: About Dhico Satria and Rubberdust.
+hide:
+  - toc
 ---
 
-I believe in learning by:
+# About
 
-- analyzing real-world-like problems
-- understanding systems from the inside
-- documenting knowledge clearly for future reference
+I am a student and engineer with a strong interest in cybersecurity, cloud infrastructure, and systems engineering. My current work focuses on CTF challenges, digital forensics, system architecture, and low-level analysis.
 
+Rubberdust is where I document what I learn, build, analyze, and break through hands-on technical exploration. Each write-up captures the reasoning, mistakes, debugging process, and lessons learned rather than only the final answer.
 
-Every writeup here reflects my learning process, including mistakes, debugging,
-and reasoning, not just final answers.
+## How I learn
 
----
-This site is continuously updated as I learn and explore new topics.
+<div class="card-grid compact">
+  <article class="content-card"><h3>Analyze</h3><p>Start from evidence, understand the system, and form testable hypotheses.</p></article>
+  <article class="content-card"><h3>Build</h3><p>Create reproducible labs and tools that turn concepts into practical skills.</p></article>
+  <article class="content-card"><h3>Document</h3><p>Write clear notes that remain useful after the immediate problem is solved.</p></article>
+</div>
 
+## Current focus
 
-- GitHub: https://github.com/dhicosatria
+- Digital forensics and malware analysis
+- CTF problem solving and security research
+- Infrastructure, networking, and containerized systems
+- Security tooling and repeatable lab environments
+
+[View my GitHub profile](https://github.com/dhicosatria){ .md-button .md-button--primary }
