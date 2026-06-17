@@ -3,37 +3,33 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Longer-form technical articles, observations, and reflections.">
+        <meta name="description" content="Centralized storage blueprint using Samba on existing Proxmox hardware.">
       
       
         <meta name="author" content="Dhico Satria">
       
       
-        <link rel="canonical" href="https://dhicosatria.github.io/docs/blog/">
+        <link rel="canonical" href="https://dhicosatria.github.io/docs/blog/2026/06/18/smb-file-server-on-proxmox/">
       
       
-        <link rel="prev" href="../notes/">
-      
-      
-        <link rel="next" href="../tags/">
       
       
         
       
       
-      <link rel="icon" href="../assets/images/favicon.png">
+      <link rel="icon" href="../../../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
     
     
       
-        <title>Blog - Rubberdust</title>
+        <title>SMB File Server on Proxmox - Rubberdust</title>
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../../../../assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../../../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -52,27 +48,27 @@
       
     
     
-      <link rel="stylesheet" href="../styles/extra.css">
+      <link rel="stylesheet" href="../../../../../styles/extra.css">
     
-      <link rel="stylesheet" href="../assets/document_dates/fonts/material-icons.css">
+      <link rel="stylesheet" href="../../../../../assets/document_dates/fonts/material-icons.css">
     
-      <link rel="stylesheet" href="../assets/document_dates/tippy/tippy.css">
+      <link rel="stylesheet" href="../../../../../assets/document_dates/tippy/tippy.css">
     
-      <link rel="stylesheet" href="../assets/document_dates/tippy/shift-away.css">
+      <link rel="stylesheet" href="../../../../../assets/document_dates/tippy/shift-away.css">
     
-      <link rel="stylesheet" href="../assets/document_dates/tippy/scale.css">
+      <link rel="stylesheet" href="../../../../../assets/document_dates/tippy/scale.css">
     
-      <link rel="stylesheet" href="../assets/document_dates/tippy/light.css">
+      <link rel="stylesheet" href="../../../../../assets/document_dates/tippy/light.css">
     
-      <link rel="stylesheet" href="../assets/document_dates/tippy/material.css">
+      <link rel="stylesheet" href="../../../../../assets/document_dates/tippy/material.css">
     
-      <link rel="stylesheet" href="../assets/document_dates/tippy/backdrop.css">
+      <link rel="stylesheet" href="../../../../../assets/document_dates/tippy/backdrop.css">
     
-      <link rel="stylesheet" href="../assets/document_dates/core/core.css">
+      <link rel="stylesheet" href="../../../../../assets/document_dates/core/core.css">
     
-      <link rel="stylesheet" href="../assets/document_dates/user.config.css">
+      <link rel="stylesheet" href="../../../../../assets/document_dates/user.config.css">
     
-    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
   
@@ -83,12 +79,12 @@
   
   <meta property="og:site_name" content="Rubberdust">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Blog · Rubberdust">
-<meta property="og:description" content="Longer-form technical articles, observations, and reflections.">
-<meta property="og:url" content="https://dhicosatria.github.io/docs/blog/">
+<meta property="og:title" content="SMB File Server on Proxmox · Rubberdust">
+<meta property="og:description" content="Centralized storage blueprint using Samba on existing Proxmox hardware.">
+<meta property="og:url" content="https://dhicosatria.github.io/docs/blog/2026/06/18/smb-file-server-on-proxmox/">
 <meta name="twitter:card" content="summary">
 
-  <link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+  <link href="../../../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../../../../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
             html.glightbox-open { overflow: initial; height: 100%; }
             .gslide-title { margin-top: 0px; user-select: text; }
             .gslide-desc { color: #666; user-select: text; }
@@ -117,7 +113,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#latest" class="md-skip">
+        <a href="#smb-file-server-on-proxmox-centralized-storage-blueprint" class="md-skip">
           Skip to content
         </a>
       
@@ -131,9 +127,9 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href=".." title="Rubberdust" class="md-header__button md-logo" aria-label="Rubberdust" data-md-component="logo">
+    <a href="../../../../.." title="Rubberdust" class="md-header__button md-logo" aria-label="Rubberdust" data-md-component="logo">
       
-  <img src="../assets/logo.svg" alt="logo">
+  <img src="../../../../../assets/logo.svg" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -150,7 +146,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Blog
+              SMB File Server on Proxmox
             
           </span>
         </div>
@@ -256,7 +252,7 @@
   
   
     <li class="md-tabs__item">
-      <a href=".." class="md-tabs__link">
+      <a href="../../../../.." class="md-tabs__link">
         
   
   
@@ -277,7 +273,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../ctf/" class="md-tabs__link">
+        <a href="../../../../../ctf/" class="md-tabs__link">
           
   
   
@@ -299,7 +295,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../labs_simulate/" class="md-tabs__link">
+        <a href="../../../../../labs_simulate/" class="md-tabs__link">
           
   
   
@@ -319,7 +315,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../project/" class="md-tabs__link">
+      <a href="../../../../../project/" class="md-tabs__link">
         
   
   
@@ -338,7 +334,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../notes/" class="md-tabs__link">
+      <a href="../../../../../notes/" class="md-tabs__link">
         
   
   
@@ -359,7 +355,7 @@
   
   
     <li class="md-tabs__item md-tabs__item--active">
-      <a href="./" class="md-tabs__link">
+      <a href="../../../../" class="md-tabs__link">
         
   
   
@@ -378,7 +374,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../tags/" class="md-tabs__link">
+      <a href="../../../../../tags/" class="md-tabs__link">
         
   
   
@@ -397,7 +393,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../about/" class="md-tabs__link">
+      <a href="../../../../../about/" class="md-tabs__link">
         
   
   
@@ -434,9 +430,9 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="Rubberdust" class="md-nav__button md-logo" aria-label="Rubberdust" data-md-component="logo">
+    <a href="../../../../.." title="Rubberdust" class="md-nav__button md-logo" aria-label="Rubberdust" data-md-component="logo">
       
-  <img src="../assets/logo.svg" alt="logo">
+  <img src="../../../../../assets/logo.svg" alt="logo">
 
     </a>
     Rubberdust
@@ -451,7 +447,7 @@
   
   
     <li class="md-nav__item">
-      <a href=".." class="md-nav__link">
+      <a href="../../../../.." class="md-nav__link">
         
   
   
@@ -503,7 +499,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../ctf/" class="md-nav__link ">
+            <a href="../../../../../ctf/" class="md-nav__link ">
               
   
   
@@ -652,7 +648,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../ctf/advent-of-cyber_cyberstudent_2025/" class="md-nav__link ">
+            <a href="../../../../../ctf/advent-of-cyber_cyberstudent_2025/" class="md-nav__link ">
               
   
   
@@ -696,7 +692,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ctf/advent-of-cyber_cyberstudent_2025/day_1_The-Mission-Begins/" class="md-nav__link">
+      <a href="../../../../../ctf/advent-of-cyber_cyberstudent_2025/day_1_The-Mission-Begins/" class="md-nav__link">
         
   
   
@@ -724,7 +720,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ctf/advent-of-cyber_cyberstudent_2025/day_2_The-First-Strike/" class="md-nav__link">
+      <a href="../../../../../ctf/advent-of-cyber_cyberstudent_2025/day_2_The-First-Strike/" class="md-nav__link">
         
   
   
@@ -752,7 +748,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ctf/advent-of-cyber_cyberstudent_2025/day_3_Syndicate-Infrastructure/" class="md-nav__link">
+      <a href="../../../../../ctf/advent-of-cyber_cyberstudent_2025/day_3_Syndicate-Infrastructure/" class="md-nav__link">
         
   
   
@@ -780,7 +776,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ctf/advent-of-cyber_cyberstudent_2025/day_4_The-Elf%27s-Wager/" class="md-nav__link">
+      <a href="../../../../../ctf/advent-of-cyber_cyberstudent_2025/day_4_The-Elf%27s-Wager/" class="md-nav__link">
         
   
   
@@ -808,7 +804,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ctf/advent-of-cyber_cyberstudent_2025/day_5_Kramazon/" class="md-nav__link">
+      <a href="../../../../../ctf/advent-of-cyber_cyberstudent_2025/day_5_Kramazon/" class="md-nav__link">
         
   
   
@@ -836,7 +832,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ctf/advent-of-cyber_cyberstudent_2025/day_6_KDNU-3B/" class="md-nav__link">
+      <a href="../../../../../ctf/advent-of-cyber_cyberstudent_2025/day_6_KDNU-3B/" class="md-nav__link">
         
   
   
@@ -864,7 +860,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ctf/advent-of-cyber_cyberstudent_2025/day_7_Failed-Exfil/" class="md-nav__link">
+      <a href="../../../../../ctf/advent-of-cyber_cyberstudent_2025/day_7_Failed-Exfil/" class="md-nav__link">
         
   
   
@@ -892,7 +888,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ctf/advent-of-cyber_cyberstudent_2025/day_8_Log-Folly/" class="md-nav__link">
+      <a href="../../../../../ctf/advent-of-cyber_cyberstudent_2025/day_8_Log-Folly/" class="md-nav__link">
         
   
   
@@ -920,7 +916,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ctf/advent-of-cyber_cyberstudent_2025/day_9_Time-to-Escalate/" class="md-nav__link">
+      <a href="../../../../../ctf/advent-of-cyber_cyberstudent_2025/day_9_Time-to-Escalate/" class="md-nav__link">
         
   
   
@@ -948,7 +944,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ctf/advent-of-cyber_cyberstudent_2025/day_10_Jingle%27s-Validator/" class="md-nav__link">
+      <a href="../../../../../ctf/advent-of-cyber_cyberstudent_2025/day_10_Jingle%27s-Validator/" class="md-nav__link">
         
   
   
@@ -976,7 +972,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ctf/advent-of-cyber_cyberstudent_2025/day_11_Syndiware/" class="md-nav__link">
+      <a href="../../../../../ctf/advent-of-cyber_cyberstudent_2025/day_11_Syndiware/" class="md-nav__link">
         
   
   
@@ -1004,7 +1000,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ctf/advent-of-cyber_cyberstudent_2025/day_12_Re-Key-very/" class="md-nav__link">
+      <a href="../../../../../ctf/advent-of-cyber_cyberstudent_2025/day_12_Re-Key-very/" class="md-nav__link">
         
   
   
@@ -1032,7 +1028,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ctf/advent-of-cyber_cyberstudent_2025/day_13_Holiday-Routing/" class="md-nav__link">
+      <a href="../../../../../ctf/advent-of-cyber_cyberstudent_2025/day_13_Holiday-Routing/" class="md-nav__link">
         
   
   
@@ -1060,7 +1056,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ctf/advent-of-cyber_cyberstudent_2025/day_14_Multifactorial/" class="md-nav__link">
+      <a href="../../../../../ctf/advent-of-cyber_cyberstudent_2025/day_14_Multifactorial/" class="md-nav__link">
         
   
   
@@ -1088,7 +1084,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ctf/advent-of-cyber_cyberstudent_2025/day_17_Guide-My-Drone-Tonight/" class="md-nav__link">
+      <a href="../../../../../ctf/advent-of-cyber_cyberstudent_2025/day_17_Guide-My-Drone-Tonight/" class="md-nav__link">
         
   
   
@@ -1155,7 +1151,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../ctf/forensics/" class="md-nav__link ">
+            <a href="../../../../../ctf/forensics/" class="md-nav__link ">
               
   
   
@@ -1199,7 +1195,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ctf/forensics/shikataganai/" class="md-nav__link">
+      <a href="../../../../../ctf/forensics/shikataganai/" class="md-nav__link">
         
   
   
@@ -1265,7 +1261,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../labs_simulate/" class="md-nav__link ">
+            <a href="../../../../../labs_simulate/" class="md-nav__link ">
               
   
   
@@ -1309,7 +1305,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../labs_simulate/automated-lfi-to-ntlmv2-lab/" class="md-nav__link">
+      <a href="../../../../../labs_simulate/automated-lfi-to-ntlmv2-lab/" class="md-nav__link">
         
   
   
@@ -1344,7 +1340,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../project/" class="md-nav__link">
+      <a href="../../../../../project/" class="md-nav__link">
         
   
   
@@ -1371,7 +1367,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../notes/" class="md-nav__link">
+      <a href="../../../../../notes/" class="md-nav__link">
         
   
   
@@ -1399,35 +1395,10 @@
   
   
     
-      
-    
   
   
     <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Blog
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+      <a href="../../../../" class="md-nav__link">
         
   
   
@@ -1443,46 +1414,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#latest" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Latest
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#topics" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Topics
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1494,7 +1425,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tags/" class="md-nav__link">
+      <a href="../../../../../tags/" class="md-nav__link">
         
   
   
@@ -1521,7 +1452,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../about/" class="md-nav__link">
+      <a href="../../../../../about/" class="md-nav__link">
         
   
   
@@ -1551,7 +1482,7 @@
               
                 
               
-              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" hidden>
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
                     
@@ -1559,6 +1490,8 @@
 <nav class="md-nav md-nav--secondary" aria-label="Table of contents">
   
   
+  
+    
   
   
     <label class="md-nav__title" for="__toc">
@@ -1568,10 +1501,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#latest" class="md-nav__link">
+  <a href="#overview" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Latest
+        Overview
       
     </span>
   </a>
@@ -1579,10 +1512,121 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#topics" class="md-nav__link">
+  <a href="#environment" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Topics
+        Environment
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Environment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hardware" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hardware
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#network" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Network
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Installation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#user-and-permissions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        User and Permissions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#samba-config" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Samba Config
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#access" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Access
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Access">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#linux" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Linux
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#windows" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Windows
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notes
       
     </span>
   </a>
@@ -1598,27 +1642,176 @@
             
           
           
-  <div class="md-content blog-page" data-md-component="content">
+  <div class="md-content md-content--post" data-md-component="content">
+    <div class="md-sidebar md-sidebar--post" data-md-component="sidebar" data-md-type="navigation">
+      <div class="md-sidebar__scrollwrap">
+        <div class="md-sidebar__inner md-post">
+          <nav class="md-nav md-nav--primary">
+            <div class="md-post__back">
+              <div class="md-nav__title md-nav__container">
+                <a href="../../../../" class="md-nav__link">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+                  <span class="md-ellipsis">
+                    Back to index
+                  </span>
+                </a>
+              </div>
+            </div>
+            
+            <ul class="md-post__meta md-nav__list">
+              <li class="md-nav__item md-nav__item--section">
+                <div class="md-post__title">
+                  <span class="md-ellipsis">
+                    Metadata
+                  </span>
+                </div>
+                <nav class="md-nav">
+                  <ul class="md-nav__list">
+                    <li class="md-nav__item">
+                      <div class="md-nav__link">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 19H5V8h14m-3-7v2H8V1H6v2H5c-1.11 0-2 .89-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-1V1m-1 11h-5v5h5z"></path></svg>
+                        <time datetime="2026-06-18 20:21:00+07:00" class="md-ellipsis">June 18, 2026</time>
+                      </div>
+                    </li>
+                    
+                    
+                    
+                      
+                      <li class="md-nav__item">
+                        <div class="md-nav__link">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20a8 8 0 0 0 8-8 8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8m0-18a10 10 0 0 1 10 10 10 10 0 0 1-10 10C6.47 22 2 17.5 2 12A10 10 0 0 1 12 2m.5 5v5.25l4.5 2.67-.75 1.23L11 13V7z"></path></svg>
+                          <span class="md-ellipsis">
+                            
+                              1 min read
+                            
+                          </span>
+                        </div>
+                      </li>
+                    
+                  </ul>
+                </nav>
+              </li>
+            </ul>
+            
+          </nav>
+          
+        </div>
+      </div>
+    </div>
     <article class="md-content__inner md-typeset">
+      
+        
   
 
 
+  <nav class="md-tags">
+    
+      
+      
+      
+      
+        <a href="../../../../../tags/#tag:homelab" class="md-tag">homelab</a>
+      
+    
+      
+      
+      
+      
+        <a href="../../../../../tags/#tag:proxmox" class="md-tag">proxmox</a>
+      
+    
+      
+      
+      
+      
+        <a href="../../../../../tags/#tag:samba" class="md-tag">samba</a>
+      
+    
+      
+      
+      
+      
+        <a href="../../../../../tags/#tag:smb" class="md-tag">smb</a>
+      
+    
+      
+      
+      
+      
+        <a href="../../../../../tags/#tag:storage" class="md-tag">storage</a>
+      
+    
+  </nav>
 
 
-<header class="blog-intro">
-<p class="eyebrow">RUBBERDUST JOURNAL</p>
-<h1>Blog</h1>
-<p>Longer-form technical articles, observations, and reflections from hands-on work.</p>
-</header>
 
-<h2 id="latest">Latest<a class="headerlink" href="#latest" title="Permanent link">¶</a></h2>
-<ul class="blog-list">
-<li><time>Coming soon</time><span>First article is being prepared.</span></li>
+<h1 id="smb-file-server-on-proxmox-centralized-storage-blueprint">SMB File Server on Proxmox: Centralized Storage Blueprint<a class="headerlink" href="#smb-file-server-on-proxmox-centralized-storage-blueprint" title="Permanent link">¶</a></h1>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">¶</a></h2>
+<p>This article documents a practical way to build a centralized SMB file server on an existing Proxmox host. No extra VM is required.</p>
+<p>Use cases:</p>
+<ul>
+<li>VM backup repository</li>
+<li>Knowledge repository</li>
+<li>Malware sample repository</li>
+<li>Security data lake</li>
+<li>General shared storage</li>
 </ul>
-
-<h2 id="topics">Topics<a class="headerlink" href="#topics" title="Permanent link">¶</a></h2>
-<p><a href="../ctf/">Security research</a> · <a href="../labs_simulate/">Labs</a></p>
-<div class="document-dates-plugin-wrapper document-dates-bottom"><div class="document-dates-plugin" locale="en"><div class="dd-left"><span class="dd-item" data-tippy-content data-tippy-raw="2026-06-12"><span class="material-icons" data-icon="doc_created"></span><time datetime="2026-06-12T05:40:54+07:00">2026-06-12 05:40:54</time></span><span class="dd-item" data-tippy-content data-tippy-raw="2026-06-13"><span class="material-icons" data-icon="doc_updated"></span><time datetime="2026-06-13T00:45:04+07:00">2026-06-13 00:45:04</time></span></div><div class="dd-right"><span class="material-icons" data-icon="doc_author"></span><div class="author-group"><div class="avatar-wrapper" data-name="dhicosatria" data-tippy-content data-tippy-raw="&lt;a href=&quot;mailto:dhicosatria77@gmail.com&quot;&gt;dhicosatria&lt;/a&gt;"><span class="avatar-text"></span><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="" data-desc-position="bottom"><img class="avatar" data-src="" data-email="dhicosatria77@gmail.com"></a></div></div></div></div></div>
+<h2 id="environment">Environment<a class="headerlink" href="#environment" title="Permanent link">¶</a></h2>
+<h3 id="hardware">Hardware<a class="headerlink" href="#hardware" title="Permanent link">¶</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>SSD #1 (372GB): Proxmox OS + VM Storage
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>SSD #2 (238GB): Additional VM Storage
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>HDD 2TB: backups, malware, datalake, share, knowledge
+</code></pre></div>
+<h2 id="network">Network<a class="headerlink" href="#network" title="Permanent link">¶</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>OPNsense
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>  ├── Proxmox 192.168.1.10
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>  └── Client VMs
+</code></pre></div>
+<h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">¶</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>apt<span class="w"> </span>update
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>apt<span class="w"> </span>install<span class="w"> </span>samba<span class="w"> </span>-y
+</code></pre></div>
+<h2 id="user-and-permissions">User and Permissions<a class="headerlink" href="#user-and-permissions" title="Permanent link">¶</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>useradd<span class="w"> </span>-m<span class="w"> </span>storageadmin
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>passwd<span class="w"> </span>storageadmin
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>groupadd<span class="w"> </span>labstorage
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>usermod<span class="w"> </span>-aG<span class="w"> </span>labstorage<span class="w"> </span>storageadmin
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>smbpasswd<span class="w"> </span>-a<span class="w"> </span>storageadmin
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>chgrp<span class="w"> </span>-R<span class="w"> </span>labstorage<span class="w"> </span>/mnt/storage
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>chmod<span class="w"> </span>-R<span class="w"> </span><span class="m">2775</span><span class="w"> </span>/mnt/storage
+</code></pre></div>
+<h2 id="samba-config">Samba Config<a class="headerlink" href="#samba-config" title="Permanent link">¶</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">[LabStorage]</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="na">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">/mnt/storage</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="na">browseable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">yes</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="na">writable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">yes</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="na">guest ok</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">no</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="na">valid users</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">storageadmin</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="na">force group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">labstorage</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="na">create mask</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">0664</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="na">directory mask</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">2775</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="na">inherit permissions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">yes</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>systemctl<span class="w"> </span>restart<span class="w"> </span>smbd
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>testparm
+</code></pre></div>
+<h2 id="access">Access<a class="headerlink" href="#access" title="Permanent link">¶</a></h2>
+<h3 id="linux">Linux<a class="headerlink" href="#linux" title="Permanent link">¶</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>smbclient<span class="w"> </span>//192.168.1.10/LabStorage<span class="w"> </span>-U<span class="w"> </span>storageadmin
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>mount<span class="w"> </span>-t<span class="w"> </span>cifs<span class="w"> </span>//192.168.1.10/LabStorage<span class="w"> </span>/mnt/labstorage<span class="w"> </span>-o<span class="w"> </span><span class="nv">username</span><span class="o">=</span>storageadmin
+</code></pre></div>
+<h3 id="windows">Windows<a class="headerlink" href="#windows" title="Permanent link">¶</a></h3>
+<p>\192.168.1.10\LabStorage</p>
+<h2 id="notes">Notes<a class="headerlink" href="#notes" title="Permanent link">¶</a></h2>
+<ul>
+<li>Disable guest access</li>
+<li>Keep Samba updated</li>
+<li>Restrict to internal networks</li>
+<li>Do not expose SMB to internet</li>
+</ul>
+<p><em>Status: practice draft</em>
+<em>Last updated: 2026-06-18</em></p>
+<div class="document-dates-plugin-wrapper document-dates-bottom"><div class="document-dates-plugin" locale="en"><div class="dd-left"><span class="dd-item" data-tippy-content data-tippy-raw="2026-06-18"><span class="material-icons" data-icon="doc_created"></span><time datetime="2026-06-18T20:21:00">2026-06-18 20:21:00</time></span><span class="dd-item" data-tippy-content data-tippy-raw="2026-06-18"><span class="material-icons" data-icon="doc_updated"></span><time datetime="2026-06-18T05:39:13+07:00">2026-06-18 05:39:13</time></span></div><div class="dd-right"><span class="material-icons" data-icon="doc_author"></span><div class="author-group"><div class="avatar-wrapper" data-name="dhicosatria" data-tippy-content data-tippy-raw="&lt;a href=&quot;mailto:dhicosatria77@gmail.com&quot;&gt;dhicosatria&lt;/a&gt;"><span class="avatar-text"></span><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="" data-desc-position="bottom"><img class="avatar" data-src="" data-email="dhicosatria77@gmail.com"></a></div></div></div></div></div>
 
 
 
@@ -1637,7 +1830,9 @@
   
 
 
-</article>
+
+      
+    </article>
   </div>
 
           
@@ -1657,12 +1852,6 @@
         
 <footer class="md-footer">
   
-    
-      
-      <nav class="md-footer__inner md-grid" aria-label="Footer">
-        <a href="../notes/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Notes"><div class="md-footer__button md-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg></div><div class="md-footer__title"><span class="md-footer__direction">Previous</span><div class="md-ellipsis">Notes</div></div></a>
-        <a href="../tags/" class="md-footer__link md-footer__link--next" aria-label="Next: Tags"><div class="md-footer__title"><span class="md-footer__direction">Next</span><div class="md-ellipsis">Tags</div></div><div class="md-footer__button md-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"></path></svg></div></a>
-      </nav>
     
   
   <div class="md-footer-meta md-typeset"><div class="md-footer-meta__inner md-grid"><div class="md-copyright">
@@ -1700,24 +1889,24 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.indexes", "navigation.path", "navigation.top", "navigation.footer", "content.code.copy", "content.tabs.link", "content.tooltips", "search.suggest", "search.highlight", "search.share"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../../../..", "features": ["navigation.tabs", "navigation.indexes", "navigation.path", "navigation.top", "navigation.footer", "content.code.copy", "content.tabs.link", "content.tooltips", "search.suggest", "search.highlight", "search.share"], "search": "../../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
-        <script src="../assets/document_dates/tippy/popper.min.js"></script>
+        <script src="../../../../../assets/document_dates/tippy/popper.min.js"></script>
       
-        <script src="../assets/document_dates/tippy/tippy.umd.min.js"></script>
+        <script src="../../../../../assets/document_dates/tippy/tippy.umd.min.js"></script>
       
-        <script src="../assets/document_dates/core/md5.min.js"></script>
+        <script src="../../../../../assets/document_dates/core/md5.min.js"></script>
       
-        <script src="../assets/document_dates/core/default.config.js"></script>
+        <script src="../../../../../assets/document_dates/core/default.config.js"></script>
       
-        <script src="../assets/document_dates/user.config.js"></script>
+        <script src="../../../../../assets/document_dates/user.config.js"></script>
       
-        <script src="../assets/document_dates/core/utils.js"></script>
+        <script src="../../../../../assets/document_dates/core/utils.js"></script>
       
-        <script src="../assets/document_dates/core/core.js"></script>
+        <script src="../../../../../assets/document_dates/core/core.js"></script>
       
     
   
