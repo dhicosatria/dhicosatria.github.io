@@ -1,4 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="R">
-  <rect width="64" height="64" rx="14" fill="currentColor"/>
-  <path d="M19 49V15h16.5c8.4 0 13.5 4.4 13.5 11.7 0 5.2-2.7 8.9-7.5 10.5L50 49H39.7l-7.1-10.3h-4.2V49H19zm9.4-18.1h6.2c3.3 0 5.1-1.4 5.1-4.1 0-2.8-1.8-4.1-5.1-4.1h-6.2v8.2z" fill="var(--md-primary-bg-color, white)"/>
-</svg>

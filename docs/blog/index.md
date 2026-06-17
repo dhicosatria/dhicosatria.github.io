@@ -14,7 +14,7 @@ hide: [navigation, toc]
 ## Latest
 
 <ul class="blog-list">
-<li><time>Coming soon</time><span>First article is being prepared.</span></li>
+<li><time>2026-06-18</time><a href="../2026/06/18/smb-file-server-on-proxmox/"><span>SMB File Server on Proxmox: Centralized Storage Blueprint</span></a></li>
 </ul>
 
 ## Topics
