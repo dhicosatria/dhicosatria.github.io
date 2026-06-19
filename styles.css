@@ -1,0 +1,27 @@
+:root{--bg:#f5f5f2;--card:#fff;--text:#171717;--muted:#6d6d68;--border:#e5e5df;--accent:#4864e8;--soft:#edf0ff;--shadow:0 10px 30px rgba(25,25,25,.06)}*{box-sizing:border-box}body{min-height:100vh;margin:0;color:var(--text);background:radial-gradient(circle at 50% 0,#fff 0,transparent 36rem),var(--bg);font-family:Inter,sans-serif}a{text-decoration:none}.page{position:relative;width:min(100% - 32px,640px);margin:auto;padding:64px 0 36px}.share-button{position:absolute;top:24px;right:0;display:grid;width:42px;height:42px;place-items:center;border:1px solid var(--border);border-radius:50%;background:#fff;cursor:pointer}.share-button svg{width:19px;fill:none;stroke:currentColor;stroke-width:1.8}.profile{display:flex;flex-direction:column;align-items:center;text-align:center}
+
+/* PERBAIKAN: Mengatur wadah luar avatar (Spasi bawah & samping telah dihilangkan) */
+.avatar {
+    display: grid;
+    place-items: center;
+    width: 104px;
+    height: 104px;
+    margin-bottom: 0px;        /* Spasi di bawah avatar diubah menjadi 0 */
+    overflow: hidden;          /* Menyembunyikan gambar yang keluar dari lingkaran */
+    border: 2px solid #fff;
+    border-radius: 50%;        /* Kembali ke 50% agar bulat sempurna */
+    box-shadow: 0 12px 35px #4864e83d;
+}
+
+/* Mengatur gambar di dalam avatar */
+.avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1.1) translateY(-8px); /* -8px akan menarik gambar ke atas. Sesuaikan angkanya jika kurang naik */
+    display: block;
+}
+
+
+
+.availability{display:flex;gap:7px;align-items:center;margin-bottom:12px;padding:6px 10px;border:1px solid #dce7d9;border-radius:99px;color:#397341;background:#f2f8f1;font-size:11px;font-weight:600}.availability span{width:7px;height:7px;border-radius:50%;background:#55a460}h1{margin:0;font-size:clamp(29px,7vw,38px);letter-spacing:-.055em}.username{margin:6px 0 0;color:var(--accent);font-size:13px;font-weight:600}.bio{max-width:510px;margin:16px 0 0;color:var(--muted);font-size:14px;line-height:1.65}.socials{display:flex;gap:10px;margin-top:20px}.socials a{display:grid;width:42px;height:42px;place-items:center;border:1px solid var(--border);border-radius:50%;color:var(--text);background:var(--card);font-size:12px;font-weight:700;transition:.18s}.socials a:hover{color:var(--accent);transform:translateY(-2px)}.links{display:grid;gap:12px;margin-top:44px}.links>h2{margin:0 0 2px;color:var(--muted);font-size:12px;letter-spacing:.04em;text-transform:uppercase}.link-card{display:flex;gap:15px;align-items:center;min-height:82px;padding:14px 17px;border:1px solid var(--border);border-radius:18px;color:var(--text);background:var(--card);transition:.18s}.link-card:hover{border-color:#d2d7ef;box-shadow:var(--shadow);transform:translateY(-3px)}.featured{border-color:#d8defb;background:linear-gradient(135deg,#fff,#f6f7ff)}.link-emoji{display:grid;flex:0 0 50px;height:50px;place-items:center;border-radius:14px;background:var(--soft);font-size:21px}.link-copy{display:grid;gap:5px;min-width:0}.link-copy strong{font-size:14px}.link-copy small{overflow:hidden;color:var(--muted);font-size:11px;text-overflow:ellipsis;white-space:nowrap}.arrow{margin-left:auto;color:#aaa9a3;font-size:20px}.about{margin-top:38px;padding:28px;border:1px solid var(--border);border-radius:22px;background:var(--card)}.section-label{color:var(--accent);font-size:11px;font-weight:700;text-transform:uppercase}.about h2{margin:10px 0;font-size:clamp(20px,5vw,26px);letter-spacing:-.04em}.about p{margin:0;color:var(--muted);font-size:13px;line-height:1.7}.interests{display:flex;flex-wrap:wrap;gap:7px;margin-top:18px}.interests span{padding:7px 10px;border-radius:99px;background:#f1f1ed;font-size:10px;font-weight:600}footer{display:flex;justify-content:space-between;margin-top:30px;color:#999992;font-size:10px}.toast{position:fixed;bottom:24px;left:50%;padding:11px 16px;border-radius:99px;color:#fff;background:#242424;opacity:0;transform:translate(-50%,12px);transition:.2s}.toast.show{opacity:1;transform:translate(-50%,0)}@media(max-width:520px){.page{width:min(100% - 24px,640px);padding-top:54px}.avatar{width:92px;height:92px}.links{margin-top:36px}.link-card{min-height:76px;padding:12px}.about{padding:22px}footer{gap:8px;flex-direction:column;align-items:center}}@media(prefers-reduced-motion:reduce){*{transition-duration:.01ms!important}}
