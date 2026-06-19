@@ -3,7 +3,7 @@
     var rows = Array.prototype.slice.call(block.querySelectorAll('.catalog-row'));
     var pager = block.querySelector('.catalog-pagination');
     var summary = block.querySelector('.catalog-summary');
-    if (!rows.length || !pager || !summary) return;
+    if (!rows.length || !pager) return;
 
     var perPage = Number(block.getAttribute('data-per-page') || 5);
     var totalPages = Math.ceil(rows.length / perPage);
@@ -20,7 +20,7 @@
 
       var start = current * perPage + 1;
       var end = Math.min((current + 1) * perPage, rows.length);
-      summary.textContent = '— showing ' + start + '-' + end + ' of ' + rows.length;
+      if (summary) summary.textContent = '— showing ' + start + '-' + end + ' of ' + rows.length;
 
       if (prev) prev.disabled = current === 0;
       if (next) next.disabled = current === totalPages - 1;

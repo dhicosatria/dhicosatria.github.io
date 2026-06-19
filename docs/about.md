@@ -8,15 +8,14 @@ hide: [toc]
 
 <section class="notes-shell page-shell about-page">
   <header class="notes-page-header about-hero">
-    <p class="notes-kicker">About</p>
     <h1>About</h1>
-    <p>I am a student and engineer with a strong interest in cybersecurity, cloud infrastructure, and systems engineering.</p>
+    <p>An engineer with a strong interest in cybersecurity, cloud infrastructure, and systems engineering.</p>
   </header>
 
   <section class="about-narrative">
     <h2>Profile</h2>
-    <p>My current work focuses on CTF challenges, digital forensics, system architecture, and low-level analysis.</p>
-    <p>Rubberdust is where I document what I learn, build, analyze, and break through hands-on technical exploration. Each write-up captures the reasoning, mistakes, debugging process, and lessons learned rather than only the final answer.</p>
+<!--     <p>My current work focuses on CTF challenges, digital forensics, system architecture, and  analysis.</p>
+    <p>Rubberdust is where I document what I learn, build, analyze, and break through hands-on technical exploration. Each write-up captures the reasoning, mistakes, debugging process, and lessons learned.</p> -->
   </section>
 
   <section class="about-process">
