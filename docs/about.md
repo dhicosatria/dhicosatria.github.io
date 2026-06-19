@@ -1,29 +1,37 @@
 ---
 title: About
 description: About Dhico Satria and Rubberdust.
-hide:
-  - toc
+hide: [toc]
 ---
 
-# About
+<nav class="page-breadcrumb" aria-label="Breadcrumb"><a href="../">Home</a><span>/</span><span>About</span></nav>
 
-I am a student and engineer with a strong interest in cybersecurity, cloud infrastructure, and systems engineering. My current work focuses on CTF challenges, digital forensics, system architecture, and low-level analysis.
+<section class="notes-shell page-shell about-page">
+  <header class="notes-page-header about-hero">
+    <p class="notes-kicker">About</p>
+    <h1>About</h1>
+    <p>I am a student and engineer with a strong interest in cybersecurity, cloud infrastructure, and systems engineering.</p>
+  </header>
 
-Rubberdust is where I document what I learn, build, analyze, and break through hands-on technical exploration. Each write-up captures the reasoning, mistakes, debugging process, and lessons learned rather than only the final answer.
+  <section class="about-narrative">
+    <h2>Profile</h2>
+    <p>My current work focuses on CTF challenges, digital forensics, system architecture, and low-level analysis.</p>
+    <p>Rubberdust is where I document what I learn, build, analyze, and break through hands-on technical exploration. Each write-up captures the reasoning, mistakes, debugging process, and lessons learned rather than only the final answer.</p>
+  </section>
 
-## How I learn
+  <section class="about-process">
+    <h2>How I learn</h2>
+    <div class="about-process-grid">
+      <article><strong>Analyze</strong><p>Start from evidence, understand the system, and form testable hypotheses.</p></article>
+      <article><strong>Build</strong><p>Create reproducible labs and tools that turn concepts into practical skills.</p></article>
+      <article><strong>Document</strong><p>Write clear notes that remain useful after the immediate problem is solved.</p></article>
+    </div>
+  </section>
 
-<div class="card-grid compact">
-  <article class="content-card"><h3>Analyze</h3><p>Start from evidence, understand the system, and form testable hypotheses.</p></article>
-  <article class="content-card"><h3>Build</h3><p>Create reproducible labs and tools that turn concepts into practical skills.</p></article>
-  <article class="content-card"><h3>Document</h3><p>Write clear notes that remain useful after the immediate problem is solved.</p></article>
-</div>
+  <section class="about-focus">
+    <h2>Current focus</h2>
+    <ul class="notes-topic-pills"><li>Digital forensics and malware analysis</li><li>CTF problem solving and security research</li><li>Infrastructure, networking, and containerized systems</li><li>Security tooling and repeatable lab environments</li></ul>
+  </section>
 
-## Current focus
-
-- Digital forensics and malware analysis
-- CTF problem solving and security research
-- Infrastructure, networking, and containerized systems
-- Security tooling and repeatable lab environments
-
-[View my GitHub profile](https://github.com/dhicosatria){ .md-button .md-button--primary }
+  <p class="page-link-row"><a href="https://github.com/dhicosatria" class="md-button md-button--primary">View my GitHub profile</a></p>
+</section>

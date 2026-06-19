@@ -1,0 +1,30 @@
+{% set comments = config.extra.comments %}
+{% set src_uri = page.file.src_uri if page and page.file else "" %}
+{% set comments_enabled = src_uri.startswith("blog/posts/") or (src_uri.startswith("notes/") and src_uri != "notes/index.md") %}
+{% if comments and comments.provider == "utterances" and comments_enabled %}
+<script>
+  (function () {
+    if (document.getElementById("__comments")) return;
+
+    var article = document.querySelector("article.md-content__inner");
+    if (!article) return;
+
+    var section = document.createElement("section");
+    section.id = "__comments";
+    section.className = "article-comments";
+    section.innerHTML = '<h2>Comments</h2><p class="comments-note">Comments are powered by GitHub Issues. Sign in with GitHub to join the discussion.</p>';
+
+    var script = document.createElement("script");
+    script.src = "https://utteranc.es/client.js";
+    script.setAttribute("repo", "{{ comments.repo }}");
+    script.setAttribute("issue-term", "{{ comments.issue_term | default('pathname') }}");
+    script.setAttribute("label", "{{ comments.label | default('comment') }}");
+    script.setAttribute("theme", "{{ comments.theme | default('preferred-color-scheme') }}");
+    script.setAttribute("crossorigin", "anonymous");
+    script.async = true;
+
+    section.appendChild(script);
+    article.appendChild(section);
+  })();
+</script>
+{% endif %}

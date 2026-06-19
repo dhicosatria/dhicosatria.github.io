@@ -76,12 +76,20 @@ plugins:
 extra:
   analytics:
     provider: null
+  comments:
+    provider: utterances
+    repo: dhicosatria/dhicosatria.github.io
+    issue_term: pathname
+    label: blog-comment
+    theme: preferred-color-scheme
   social:
     - icon: fontawesome/brands/github
       link: https://github.com/dhicosatria
       name: Dhico Satria on GitHub
 extra_css:
   - styles/extra.css
+extra_javascript:
+  - javascripts/catalog-pagination.js
 nav:
   - Home: index.md
   - Writeups:
@@ -111,7 +119,11 @@ nav:
       - Overview: labs_simulate/index.md
       - Automated LFI to NTLMv2 Lab: labs_simulate/automated-lfi-to-ntlmv2-lab.md
   - Projects: project/index.md
-  - Notes: notes/index.md
+  - Engineering Notes:
+      - Overview: notes/index.md
+      - Systems & infrastructure:
+          - SMB File Server on Proxmox: notes/systems-infrastructure/smb-file-server-on-proxmox.md
+          - Static Site Pagination: notes/systems-infrastructure/static-site-pagination.md
   - Blog: blog/index.md
   - Tags: tags.md
   - About: about.md
